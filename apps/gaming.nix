@@ -1,4 +1,4 @@
-{ config, pkgs, modulesPath, ... }:
+{ config, pkgs, home-manager, ... }:
 
 {
     environment.systemPackages = with pkgs; [
@@ -21,18 +21,20 @@
         enable = true;
     };
 
-    # mangohud bullshit
-#     xdg.configfile ={
-#         "MangoHud/MangoHud.conf".source = "/etc/nixos/apps/MangoHud-configs/MangoHud.conf";
-#         "MangoHud/custom.conf".source = "/etc/nixos/apps/MangoHud-configs/custom.conf";
-#         "MangoHud/default.conf".source = "/etc/nixos/apps/MangoHud-configs/default.conf";
-#         "MangoHud/presets.conf".source = "/etc/nixos/apps/MangoHud-configs/presets.conf";
-#     };
+        # user config:
+        home-manager.users.fizzu = {
+            home.stateVersion = "26.11";
 
+            xdg.configFile = {
+                "MangoHud/MangoHud.conf".source = ./MangoHud-configs/MangoHud.conf;
+                "MangoHud/custom.conf".source = ./MangoHud-configs/custom.conf;
+                "MangoHud/default.conf".source = ./MangoHud-configs/default.conf;
+                "MangoHud/presets.conf".source = ./MangoHud-configs/presets.conf;
+            };
+        }; # user profile
 
     # Required for modern gaming performance (Vulkan, MangoHud, etc.)
-    hardware.graphics =
-    {
+    hardware.graphics = {
         enable = true;
         enable32Bit = true;};
 }

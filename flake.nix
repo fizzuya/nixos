@@ -12,7 +12,7 @@
 
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
         # "nixos" is the hostname, change appropriately
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -29,8 +29,13 @@
 
         ./apps/terminal.nix
         ./apps/utils.nix
-      ];
 
+        home-manager.nixosModules.home-manager {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        } # home-manager
+
+      ];
     };
   };
 }
