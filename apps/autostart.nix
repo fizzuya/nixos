@@ -1,26 +1,21 @@
-{ config, pkgs, ... }:
+{config, pkgs, ...}:
 
+# let autostartPrograms = with pkgs; [
+#     steam
+#     ];
+# in
 {
-    programs.steam.enable = true;
-
-    home-manager.users.fizzu = { ... }: {
-        xdg.configFile = {
-            "autostart/steam.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Name=Steam
-            Exec=${pkgs.steam}/bin/steam -silent
-            Icon=steam
-            Terminal=true
-            Categories=Game;
-            '';
-            "autostart/solaar.desktop".text = ''
-            [Desktop Entry]
-            Type=Application
-            Name=Solaar
-            Exec=${pkgs.solaar}/bin/solaar --w hide
-            Icon=Solaar
-            '';
+    # make an autorun service that runs once and does whatever
+    systemd.user.services.autorun = {
+        after = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        wantedBy = [ "graphical-session.target" ];
+        serviceConfig = {
+            ExecStart = "${pkgs.steam}/bin/steam -silent";
+            Restart = "on-failure";
+            RestartSec = 5;
+#             Type = "oneshot";
         };
     };
 }
+

@@ -42,7 +42,7 @@
         enable32Bit = true;
     };
 
-    # user config:
+    # per user mangohud config:
     home-manager.users.fizzu = { ... }: {
         # tying MangoHud config path into the whole thing
         xdg.configFile = {

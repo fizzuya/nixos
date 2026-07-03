@@ -28,13 +28,13 @@
         ./functionality/bluetooth.nix
         ./functionality/partitions.nix
         ./functionality/nvidia.nix
-#         ./functionality/modules.nix
 
         ./apps/gaming.nix
         ./apps/browser.nix
         ./apps/terminal.nix
         ./apps/utils.nix
         ./apps/media.nix
+        ./apps/autostart.nix
 
 
         ./home.nix
