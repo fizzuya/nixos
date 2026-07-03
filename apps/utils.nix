@@ -14,6 +14,7 @@
         python314Packages.pyqt6
         tk # tkinter
         gcc
+        _7zip-zstd
     ];
 
     services.udev.packages = with pkgs; [
