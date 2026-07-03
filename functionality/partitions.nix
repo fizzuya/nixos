@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+    swapDevices = [{
+      device = "/swapfile";
+      size = 1024 * 24;
+    }];
+
   fileSystems."/home/fizzu/storage" = {
     device = "/dev/disk/by-uuid/63108475-f3e5-4e0f-bd85-19a546b82166";
     fsType = "btrfs";
