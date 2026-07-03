@@ -1,20 +1,25 @@
 { config, pkgs, ... }:
 
 {
+    nixpkgs.config.allowUnfree = true;
+
     services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {
-    # Modesetting is strictly required for Wayland and DLSS initialization
-    modesetting.enable = true;
+        # wayland bs
+        modesetting.enable = true;
 
-    # Power management tracks state switches to prevent graphics crashes upon wake
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+        powerManagement.enable = false;
+        powerManagement.finegrained = false;
 
-    # Use the official proprietary drivers (Required for DLSS)
-    open = false;
+        # proprietary driver (for DLSS)
+        open = false;
 
-    # Pull the latest stable production branch driver
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+        # production stable driver package
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+
+    # force kernel to load modesetting arguments early in the boot cycle
+    boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 }

@@ -4,6 +4,11 @@
   inputs = {
     # default NixOS unstable branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    systems.url = "github:nix-systems/default";
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -24,13 +29,18 @@
         ./functionality/partitions.nix
         ./functionality/nvidia.nix
 
-        home-manager.nixosModules.home-manager
-        ./home.nix
-
         ./apps/gaming.nix
         ./apps/browser.nix
         ./apps/terminal.nix
         ./apps/utils.nix
+        ./apps/media.nix
+
+
+        ./home.nix
+        home-manager.nixosModules.home-manager
+        {
+        home-manager.extraSpecialArgs = { inherit inputs; };
+        }
       ];
     };
   };
