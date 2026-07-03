@@ -59,6 +59,9 @@
         "layout.spellcheckDefault" = 0;
         # previously opened tabs on boot
         "browser.startup.page" = 3;
+        # middle mouse scroll stuff
+        "general.autoScroll" = true;
+        "middlemouse.paste" = false;
         };
 
     };

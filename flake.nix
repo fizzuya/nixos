@@ -22,19 +22,15 @@
 
         ./functionality/bluetooth.nix
         ./functionality/partitions.nix
+        ./functionality/nvidia.nix
+
+        home-manager.nixosModules.home-manager
+        ./home.nix
 
         ./apps/gaming.nix
-
         ./apps/browser.nix
-
         ./apps/terminal.nix
         ./apps/utils.nix
-
-        home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        } # home-manager
-
       ];
     };
   };

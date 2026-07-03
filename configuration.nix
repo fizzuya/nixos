@@ -7,18 +7,17 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-
-      ./functionality/bluetooth.nix
-      ./functionality/partitions.nix
-
-      ./apps/gaming.nix
-
-      ./apps/browser.nix
-
-      ./apps/terminal.nix
-      ./apps/utils.nix
-
+#       ./hardware-configuration.nix
+#
+#       ./functionality/bluetooth.nix
+#       ./functionality/partitions.nix
+#
+#       ./apps/gaming.nix
+#
+#       ./apps/browser.nix
+#
+#       ./apps/terminal.nix
+#       ./apps/utils.nix
     ];
 
   # Flakes
@@ -74,7 +73,7 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+#   services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
