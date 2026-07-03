@@ -28,6 +28,7 @@
         ./functionality/bluetooth.nix
         ./functionality/partitions.nix
         ./functionality/nvidia.nix
+#         ./functionality/modules.nix
 
         ./apps/gaming.nix
         ./apps/browser.nix
