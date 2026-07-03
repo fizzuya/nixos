@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
 {
-    # trying to fix sound stuttering
-    environment.sessionVariables = {
-        PIPEWIRE_LATENCY = "128/48000";
-        PIPEWIRE_QUANTUM = "128/1024";
-    };
+    # this is ASS
+    # environment.sessionVariables = {
+    #     PIPEWIRE_LATENCY = "128/48000";
+    #     PIPEWIRE_QUANTUM = "128/1024";
+    # };
     environment.systemPackages = with pkgs; [
         spotify
         spotube
