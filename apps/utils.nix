@@ -26,8 +26,26 @@
 
     # for mouse rgb control
     services.hardware.openrgb = with pkgs;{
+        package = pkgs.openrgb-with-all-plugins;
         enable = true;
         startupProfile = "/home/fizzu/.config/OpenRGB/pink-cyan.orp";
+    };
+    # restart openrgb on wakeup
+    powerManagement.resumeCommands = ''
+        ${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 3
+        ${pkgs.systemd}/bin/systemctl restart openrgb.service'
+    '';
+
+    systemd.services.openrgb-restarter = with pkgs;{
+        after = [ "post-resume.target" ];
+        wantedBy = [ "post-resume.target" ];
+        serviceConfig = {
+            ExecStart = ''
+            ${pkgs.bash}/bin/bash -c '${pkgs.coreutils}/bin/sleep 3
+            ${pkgs.systemd}/bin/systemctl restart openrgb.service'
+            '';
+            Type = "oneshot";
+        };
     };
 
     # configure existing logiops service to use wanted dpi
