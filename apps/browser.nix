@@ -58,6 +58,11 @@
                 install_url = "https://addons.mozilla.org/firefox/downloads/latest/ctrl-number-to-switch-tabs/latest.xpi";
                 installation_mode = "force_installed";
             };
+            # Sponsorblock
+            "sponsorBlocker@ajay.app" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
+                installation_mode = "force_installed";
+            };
 
         };
         /* ---- PREFERENCES ---- */
