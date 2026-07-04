@@ -5,17 +5,22 @@
         git
         home-manager
 
-#         solaar
-#         piper
         openrgb
         logiops
         # keyd no need to mention it because services.keyd does the job for whatever reason
 
-        vscode-fhs
-        python3
-        python314
-        python314Packages.pyqt6
-        tk # tkinter
+        vscode-fhs # idk what it is tbh
+
+        (python314.withPackages (ps: with ps; # Python Set to ensure all is from one package
+            [
+                tkinter
+                pyqt6
+                pillow
+                ffmpeg-python
+
+            ]
+        ))
+
         gcc
         _7zip-zstd
     ];
