@@ -63,6 +63,11 @@
                 install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
                 installation_mode = "force_installed";
             };
+            # Stylebot
+            "{52bda3fd-dc48-4b3d-a7b9-58af57879f1e}" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/stylebot-web/latest.xpi";
+                installation_mode = "force_installed";
+            };
 
         };
         /* ---- PREFERENCES ---- */
