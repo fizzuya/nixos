@@ -9,6 +9,7 @@
     environment.systemPackages = with pkgs; [
         spotify
         spotube
+        kdePackages.kolourpaint
     ];
 
     home-manager.users.fizzu = {inputs, ...}:{
