@@ -37,7 +37,7 @@
             devices = [
                 {
                 name = "G203 LIGHTSYNC Gaming Mouse";
-                dpi = 1000;
+                dpi = 1100;
                 }
             ];
         };

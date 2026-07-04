@@ -8,6 +8,7 @@
         (pkgs.prismlauncher.override {
             jdks = [openjdk25 temurin-bin-21 temurin-bin-17 temurin-bin-8];
         })
+        min-ed-launcher
 
         protonplus
 
