@@ -73,14 +73,28 @@
         /* ---- PREFERENCES ---- */
         # about:config for options
         Preferences = {
-        "layout.spellcheckDefault" = 0;
-        # previously opened tabs on boot
-        "browser.startup.page" = 3;
-        # middle mouse scroll stuff
-        "general.autoScroll" = true;
-        "middlemouse.paste" = false;
+            "layout.spellcheckDefault" = 0;
+            # previously opened tabs on boot
+            "browser.startup.page" = 3;
+            # middle mouse scroll stuff
+            "general.autoScroll" = true;
+            "middlemouse.paste" = false;
+            # IF to use portal as filepicker
+                # 0 is never
+                # 1 is always
+                # 2 is auto
+            "widget.use-xdg-desktop-portal.file-picker" = 1;
+        };
+        "FirefoxHome" = {
+            "SponsoredTopSites" = false;
+#             "Highlights": true | false;
+#             "Pocket": true | false,
+#             "Stories": true | false,
+            "SponsoredPocket" = false;
+            "SponsoredStories" = false;
         };
 
     };
   };
 }
+

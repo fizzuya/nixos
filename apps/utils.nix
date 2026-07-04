@@ -20,8 +20,9 @@
 
             ]
         ))
-
         gcc
+
+        qbittorrent
         _7zip-zstd
     ];
 
