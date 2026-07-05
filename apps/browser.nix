@@ -10,6 +10,16 @@
     "x-scheme-handler/https" = "firefox.desktop";
   };
 
+  # configuring xdg to use gtk as default portal
+  # thunar is gtk so it should be synced with firefox
+  # dolphin is a BITCH so eeah gotta do gtk portal+thunar sadly
+  xdg.portal = {
+    enable = true; # plasma does it anyway. false would throw a conflict error
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+      common.default = "gtk";
+    };
+  };
 
   # Install firefox.
   programs.firefox = {

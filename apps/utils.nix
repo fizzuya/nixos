@@ -24,6 +24,9 @@
 
         qbittorrent
         _7zip-zstd
+        # thunar bc its gtk and firefox is gtk so i have an actual filepicker
+        # that works well in both system and firefox portal filepicker call
+        thunar
     ];
 
     # adds logitech stuff stuff so mouse can be controlled
