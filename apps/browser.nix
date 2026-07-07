@@ -21,7 +21,7 @@
     };
   };
 
-  # Install firefox.
+  # internal firefox shebang and if its even on
   programs.firefox = {
     enable = true;
 
@@ -93,7 +93,7 @@
                 # 0 is never
                 # 1 is always
                 # 2 is auto
-            "widget.use-xdg-desktop-portal.file-picker" = 1;
+            "widget.use-xdg-desktop-portal.file-picker" = 2;
         };
         "FirefoxHome" = {
             "SponsoredTopSites" = false;
