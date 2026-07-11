@@ -27,6 +27,7 @@
         gnugrep
         pciutils # pci devices database type shit idk sth along the lines
         lshw
+        wget
         busybox # a fuck ton of unix utils
                 # lspci # is in there too which i need
 

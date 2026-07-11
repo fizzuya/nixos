@@ -33,17 +33,16 @@
         winetricks ];
 
     environment.sessionVariables = {
-#         PROTON_ENABLE_WAYLAND="1";
+        PROTON_ENABLE_WAYLAND="1";
 
         PROTON_HIDE_NVIDIA_GPU="0";
         PROTON_NVIDIA_LIBS="1";
 
         PROTON_DISABLE_NVAPI="0";
         PROTON_ENABLE_NVAPI="1";
-        PROTON_FORCE_NVAPI = "1";
-        DXVK_ENABLE_NVAPI = "1";
+        PROTON_FORCE_NVAPI="1";
+        DXVK_ENABLE_NVAPI="1";
         PROTON_DLSS_UPGRADE="1";
-
         PROTON_ENABLE_NGX_UPDATER="1";
         MANGOHUD="1";
         VKD3D_CONFIG = "dxr11,dxr";
