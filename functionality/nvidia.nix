@@ -1,9 +1,22 @@
 { config, pkgs, ... }:
 
 {
+    environment.systemPackages = with pkgs; [
+        config.boot.kernelPackages.nvidiaPackages.stable
+
+        nvtopPackages.nvidia
+        mesa
+        vulkan-loader
+        vulkan-validation-layers
+        vulkan-extension-layer
+        vulkan-tools
+        libva
+        libva-utils
+    ];
+
     nixpkgs.config.allowUnfree = true;
 
-    services.xserver.videoDrivers = [ "nvidia" ];
+#     services.xserver.videoDrivers = [ "nvidia" ];
 
 
     # Required for modern gaming performance (Vulkan, MangoHud, etc.)
@@ -12,40 +25,50 @@
         enable32Bit = true;
     };
 
+    # for offload
+    # https://nixos.wiki/wiki/Nvidia
+    services.xserver.videoDrivers = [
+        "amdgpu"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
+        "nvidia"
+    ];
+
+
     hardware.nvidia = {
         modesetting.enable = true;
         nvidiaPersistenced = true;
 
         powerManagement.enable = true;      # Enable NVIDIA suspend/hibernate hooks (nvidia-suspend.service, etc.)
-        powerManagement.finegrained = false; # Fine-grained power management (recommended for Turing+ GPUs, Optimus setups)
+        powerManagement.finegrained = true; # Fine-grained power management (recommended for Turing+ GPUs, Optimus setups)
 
         nvidiaSettings = true;
 
-        # production stable driver package
+        cudaSupport = true;
+
+
+        # driver package
         package = config.boot.kernelPackages.nvidiaPackages.stable;
-        # proprietary driver (for DLSS)
-        open = false;
+        # open source or no (better be yes)
+        open = true;
 
         # either offlaod or sync
         prime = {
-            offload = {
-                enable = true;
-                enableOffloadCmd = true;
-            };
-        sync = {
-            enable = false;
-        };
-
-
             # Make sure to use the correct Bus ID values
             # sudo lshw -c display ; needs lshw
             # or
             # sudo lspci -nn | grep -i nvidia
-#                 intelBusId = "PCI:0:2:0";
-                nvidiaBusId = "PCI:1:0:0";
-                amdgpuBusId = "PCI:6:0:0";
-        };
+            nvidiaBusId = "PCI:1:0:0";
+            amdgpuBusId = "PCI:6:0:0";
 
+            offload = {
+                enable = true;
+                enableOffloadCmd = true;
+            };
+
+            sync = {
+                enable = false;
+            };
+
+        };
     };
 
 
