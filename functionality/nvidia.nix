@@ -25,10 +25,6 @@ in
         nvtopPackages.nvidia
         mesa
 
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-        vulkan-tools
         libva
         libva-utils
 
