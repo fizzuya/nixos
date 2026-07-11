@@ -14,8 +14,6 @@ in
         wrapped-btop
     ];
 
-
-
     home-manager.users.fizzu = { pkgs, ... }: {
         programs.kitty = {
             enable = true;

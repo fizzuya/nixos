@@ -1,9 +1,5 @@
 {config, pkgs, ...}:
 
-# let autostartPrograms = with pkgs; [
-#     steam
-#     ];
-# in
 {
     # make an autorun service that runs once and does whatever
     systemd.user.services.autorun = {
@@ -11,7 +7,7 @@
         wants = [ "graphical-session.target" ];
         wantedBy = [ "graphical-session.target" ];
         serviceConfig = {
-            ExecStart = "${pkgs.steam}/bin/steam -silent";
+            ExecStart = "${config.programs.steam.package}/bin/steam -silent -console";
             Restart = "on-failure";
             RestartSec = 5;
 #             Type = "oneshot";

@@ -1,23 +1,19 @@
 { config, pkgs, ... }:
 
+
+# configurable nvidia-offload
+# requires enableOffloadCmd = false; otherwise it will get overridden
+let
+    custom-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+        export __NV_PRIME_RENDER_OFFLOAD=1
+        export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+        export __GLX_VENDOR_LIBRARY_NAME=nvidia
+        export __VK_LAYER_NV_optimus=NVIDIA_only
+        exec "$@"
+    '';
+in
 {
-    environment.systemPackages = with pkgs; [
-        config.boot.kernelPackages.nvidiaPackages.stable
-
-        nvtopPackages.nvidia
-        mesa
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-        vulkan-tools
-        libva
-        libva-utils
-    ];
-
     nixpkgs.config.allowUnfree = true;
-
-#     services.xserver.videoDrivers = [ "nvidia" ];
-
 
     # Required for modern gaming performance (Vulkan, MangoHud, etc.)
     hardware.graphics = {
@@ -25,13 +21,27 @@
         enable32Bit = true;
     };
 
-    # for offload
+    environment.systemPackages = with pkgs; [
+        nvtopPackages.nvidia
+        mesa
+
+        vulkan-loader
+        vulkan-validation-layers
+        vulkan-extension-layer
+        vulkan-tools
+        libva
+        libva-utils
+
+        custom-offload
+    ];
+
+
+    # for offload,, i guess
     # https://nixos.wiki/wiki/Nvidia
     services.xserver.videoDrivers = [
         "amdgpu"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
         "nvidia"
     ];
-
 
     hardware.nvidia = {
         modesetting.enable = true;
@@ -42,13 +52,11 @@
 
         nvidiaSettings = true;
 
-        cudaSupport = true;
-
 
         # driver package
         package = config.boot.kernelPackages.nvidiaPackages.stable;
         # open source or no (better be yes)
-        open = true;
+        open = false;
 
         # either offlaod or sync
         prime = {
@@ -61,7 +69,7 @@
 
             offload = {
                 enable = true;
-                enableOffloadCmd = true;
+                enableOffloadCmd = false;
             };
 
             sync = {
@@ -91,7 +99,4 @@
 
     # (Optional) Workaround for systemd user session freeze hang:
     systemd.services."systemd-suspend".environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-
-
-
 }

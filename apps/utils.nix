@@ -17,7 +17,6 @@
                 pyqt6
                 pillow
                 ffmpeg-python
-
             ]
         ))
         gcc # The GNU Compiler Collection includes compiler front ends for C, C++, Objective-C, Fortran, OpenMP for C/C++/Fortran, and Ada, as well as libraries for these languages (libstdc++, libgomp,…).
@@ -25,27 +24,39 @@
         pkgsCross.mingwW64.buildPackages.gcc
         gnumake
 
-        kdePackages.kcalc
-        qbittorrent
-        _7zip-zstd
-
         gnugrep
         pciutils # pci devices database type shit idk sth along the lines
         lshw
         busybox # a fuck ton of unix utils
                 # lspci # is in there too which i need
 
-
-
         # thunar bc its gtk and firefox is gtk so i have an actual filepicker
         # that works well in both system and firefox portal filepicker call
         thunar
+        kdePackages.kcalc
+        qbittorrent
+        _7zip-zstd
         (wrapOBS {
             plugins = with obs-studio-plugins;[
                 obs-pipewire-audio-capture
             ];
         })
     ];
+
+    # NUKING the FUCK out of STUPID copilot key
+    services.keyd = {
+        enable = true;
+        keyboards = {
+            copilot = {
+                ids = [ "*" ]; # keyboard id, eh
+                settings = {
+                    main = {
+                        "leftmeta+leftshift+f23" = "layer(control)";
+                    };
+                };
+            };
+        };
+    };
 
     # adds logitech stuff stuff so mouse can be controlled
     # like pkgs.logitech-udev-rules
@@ -103,19 +114,4 @@
 #             ];
 #         };
 #     };
-
-    # NUKING the FUCK out of STUPID copilot key
-    services.keyd = {
-        enable = true;
-        keyboards = {
-            copilot = {
-                ids = [ "*" ]; # keyboard id, eh
-                settings = {
-                    main = {
-                        "leftmeta+leftshift+f23" = "layer(control)";
-                    };
-                };
-            };
-        };
-    };
 }

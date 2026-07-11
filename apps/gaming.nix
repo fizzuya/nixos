@@ -1,8 +1,19 @@
 { config, pkgs, ... }:
 
+# let
+#     # making steam work with params from custom nvidia-offload in nvidia.nix
+#     # because for whatever reason without this block it just does not want to boot nms. amazing
+#     custom-steam = pkgs.steam.override{
+#         extraEnv = {
+#             __NV_PRIME_RENDER_OFFLOAD = "1";
+#             __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
+#             __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+#             __VK_LAYER_NV_optimus = "NVIDIA_only";
+#         };
+#     };
+# in
 {
     environment.systemPackages = with pkgs; [
-        steam
         lutris
         xivlauncher
         (pkgs.prismlauncher.override {
@@ -21,7 +32,7 @@
         winetricks ];
 
     environment.sessionVariables = {
-        PROTON_ENABLE_WAYLAND="1";
+#         PROTON_ENABLE_WAYLAND="1";
 
         PROTON_HIDE_NVIDIA_GPU="0";
         PROTON_NVIDIA_LIBS="1";
@@ -37,6 +48,8 @@
     };
 
     programs.steam = {
+#         package = custom-steam;
+
         enable = true;
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
