@@ -1,18 +1,20 @@
 { config, pkgs, ... }:
 
+
+let
+    # gives btop a pointer to the gpu
+    wrapped-btop = pkgs.writeShellScriptBin "btop" ''
+        export LD_LIBRARY_PATH="/run/opengl-driver/lib:$LD_LIBRARY_PATH"
+        exec ${pkgs.btop}/bin/btop "$@"
+    '';
+in
 {
     environment.systemPackages = with pkgs;[
         fastfetch
-        btop
+        wrapped-btop
     ];
 
-#     programs.bash.shellAliases = {
-#         rebuild = "sudo nixos-rebuild switch --flake /etc/nixos";
-#         gitgo = "cd /etc/nixos";
-#         status = "sudo git status /etc/nixos";
-#         add = "sudo git add";
-#         hist = "sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
-#     };
+
 
     home-manager.users.fizzu = { pkgs, ... }: {
         programs.kitty = {
