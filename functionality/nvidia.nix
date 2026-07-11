@@ -5,27 +5,49 @@
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
+
+    # Required for modern gaming performance (Vulkan, MangoHud, etc.)
+    hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+    };
+
     hardware.nvidia = {
         modesetting.enable = true;
+        nvidiaPersistenced = true;
 
         powerManagement.enable = true;      # Enable NVIDIA suspend/hibernate hooks (nvidia-suspend.service, etc.)
-#         powerManagement.finegrained = true; # Fine-grained power management (recommended for Turing+ GPUs, Optimus setups)
+        powerManagement.finegrained = false; # Fine-grained power management (recommended for Turing+ GPUs, Optimus setups)
 
+        nvidiaSettings = true;
 
         # production stable driver package
         package = config.boot.kernelPackages.nvidiaPackages.stable;
         # proprietary driver (for DLSS)
         open = false;
 
-#         prime = {
-#             # Make sure to use the correct Bus ID values for your system!
-#             # sudo lshw -c display ; needs lshw
-# #                 intelBusId = "PCI:0:2:0";
-#                 nvidiaBusId = "PCI:14:0:0";
-#                 amdgpuBusId = "PCI:54:0:0";
-#         };
+        # either offlaod or sync
+        prime = {
+            offload = {
+                enable = true;
+                enableOffloadCmd = true;
+            };
+        sync = {
+            enable = false;
+        };
+
+
+            # Make sure to use the correct Bus ID values
+            # sudo lshw -c display ; needs lshw
+            # or
+            # sudo lspci -nn | grep -i nvidia
+#                 intelBusId = "PCI:0:2:0";
+                nvidiaBusId = "PCI:1:0:0";
+                amdgpuBusId = "PCI:6:0:0";
+        };
 
     };
+
 
     # force kernel to load modesetting arguments early in the boot cycle
     boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];

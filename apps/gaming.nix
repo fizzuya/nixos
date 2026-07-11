@@ -11,9 +11,11 @@
         min-ed-launcher
 
         protonplus
+        vulkan-tools
+        mesa-demos
 
         mangohud
-        vulkan-tools
+        gamescope
 
         wineWow64Packages.stable
         winetricks ];
@@ -32,15 +34,11 @@
         PROTON_ENABLE_NGX_UPDATER="1";
         MANGOHUD="1";
     };
+
     programs.steam = {
         enable = true;
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
-    };
-    # Required for modern gaming performance (Vulkan, MangoHud, etc.)
-    hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
     };
 
     # per user mangohud config:
