@@ -19,6 +19,8 @@ in
     hardware.graphics = {
         enable = true;
         enable32Bit = true;
+        extraPackages = with pkgs; [
+        ];
     };
 
     environment.systemPackages = with pkgs; [
@@ -52,7 +54,7 @@ in
         # driver package
         package = config.boot.kernelPackages.nvidiaPackages.stable;
         # open source or no (better be yes)
-        open = false;
+        open = true;
 
         # either offlaod or sync
         prime = {
@@ -87,9 +89,10 @@ in
         "nvidia-drm.modeset=1"
         "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
         "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+        "nvidia-drm.fbdev=1" # Required for smooth KDE Plasma Wayland integration
 
-        # for cachyos kernel compatibility ig
-        "nvidia.NVreg_EnableGpuFirmware=0"
+        # for cachyos kernel compatibility its supposed to be 0 but idfk
+        "nvidia.NVreg_EnableGpuFirmware=1"
     ];
 
     # If hibernation is desired, make sure swap is set and resume device is specified:

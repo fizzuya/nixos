@@ -22,6 +22,7 @@
         min-ed-launcher
 
         protonplus
+        protontricks
         vulkan-tools
         mesa-demos
 
@@ -45,6 +46,7 @@
 
         PROTON_ENABLE_NGX_UPDATER="1";
         MANGOHUD="1";
+        VKD3D_CONFIG = "dxr11,dxr";
     };
 
     programs.steam = {
