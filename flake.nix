@@ -5,6 +5,7 @@
     # default NixOS unstable branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -17,11 +18,16 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nix-cachyos-kernel, home-manager, ... }@inputs: {
         # "nixos" is the hostname, change appropriately
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        # CachyOS kernel
+#         {
+#           nixpkgs.overlays = [ nix-cachyos-kernel.overlays.default ];
+#         }
+
         ./configuration.nix
         ./hardware-configuration.nix
 

@@ -91,6 +91,9 @@ in
         "nvidia-drm.modeset=1"
         "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
         "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+
+        # for cachyos kernel compatibility ig
+        "nvidia.NVreg_EnableGpuFirmware=0"
     ];
 
     # If hibernation is desired, make sure swap is set and resume device is specified:

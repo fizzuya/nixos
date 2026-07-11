@@ -27,8 +27,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use latest kernel.
+  # linux kernel:
   boot.kernelPackages = pkgs.linuxPackages_latest;
+#   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+#   boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
