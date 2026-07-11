@@ -36,6 +36,8 @@
                 gitadd     = "sudo git add";
                 gitcommit  = "sudo git commit";
                 doall = "gitgo && gitadd -A && rebuild";
+                gitdiff = "sudo git diff";
+                gitcheckout = "sudo git checkout";
                 githist    = "sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
             };
         };
