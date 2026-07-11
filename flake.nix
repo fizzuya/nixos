@@ -5,6 +5,7 @@
     # default NixOS unstable branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
+
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     spicetify-nix = {
@@ -19,17 +20,31 @@
   };
 
   outputs = { self, nixpkgs, nix-cachyos-kernel, home-manager, ... }@inputs: {
-        # "nixos" is the hostname, change appropriately
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        # CachyOS kernel
-#         {
-#           nixpkgs.overlays = [ nix-cachyos-kernel.overlays.default ];
-#         }
+        (
+          { pkgs, ... }:
+          {
+            nixpkgs.overlays = [
+              # Use the exact nixpkgs revision as defined in this repo to ensure binary cache hits.
+              nix-cachyos-kernel.overlays.pinned
+
+              # Alternatively, use nixpkgs from your environment, nixpkgs.config will apply.
+              # Note: may not hit binary cache; kernel will need to be built locally.
+              # nix-cachyos-kernel.overlays.default
+
+              # Only use one of the two overlays!
+            ];
+            boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+
+            # ... your other configs
+          }
+        )
 
         ./configuration.nix
         ./hardware-configuration.nix
+#         ./kernel.nix
 
         ./functionality/bluetooth.nix
         ./functionality/partitions.nix

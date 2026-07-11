@@ -49,6 +49,10 @@
 
     programs.steam = {
 #         package = custom-steam;
+        extraPackages = with pkgs; [
+            vulkan-loader
+            vulkan-tools
+        ];
 
         enable = true;
         remotePlay.openFirewall = true;
