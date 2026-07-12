@@ -3,7 +3,7 @@
 {
     swapDevices = [{
       device = "/swapfile";
-      size = 1024 * 24;
+      size = 1024 * 12;
     }];
 
   fileSystems."/home/fizzu/storage" = {
