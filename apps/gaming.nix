@@ -50,8 +50,7 @@
 
     programs.steam = {
 #         package = custom-steam;
-        extraPackages = with pkgs; [
-        ];
+        extraCompatPackages = with pkgs; [ proton-ge-bin proton-cachyos ];
 
         enable = true;
         remotePlay.openFirewall = true;

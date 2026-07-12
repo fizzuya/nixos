@@ -4,6 +4,8 @@
   inputs = {
     # default NixOS unstable branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     systems.url = "github:nix-systems/default";
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
@@ -20,7 +22,7 @@
 
   };
 
-  outputs = { self, nixpkgs, systems, nix-cachyos-kernel, home-manager, spicetify-nix, ... }@inputs: {
+  outputs = { self, nixpkgs, systems, nix-cachyos-kernel, home-manager, spicetify-nix, chaotic, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -43,6 +45,9 @@
           }
         )
 
+        chaotic.nixosModules.nyx-cache
+        chaotic.nixosModules.nyx-overlay
+        chaotic.nixosModules.nyx-registry
         ./configuration.nix
         ./hardware-configuration.nix
 #         ./kernel.nix

@@ -55,7 +55,9 @@ in
 
 
         # driver package
+#         package = config.boot.kernelPackages.nvidiaPackages.stable;
         package = config.boot.kernelPackages.nvidiaPackages.stable;
+
         # open source or no (better be yes)
         open = true;
 
