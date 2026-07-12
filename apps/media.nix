@@ -20,7 +20,7 @@
         spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
         in
         {
-        enable = true;
+        enable = false;
         spotifyPackage = pkgs.spotify; # making it use same spotify as system
 
         theme = spicePkgs.themes.catppuccin;
@@ -28,7 +28,7 @@
         enabledExtensions = with spicePkgs.extensions; [
             adblock
             hidePodcasts
-#             shuffle # shuffle+ (special characters are sanitized out of extension names)
+            shuffle # shuffle+ (special characters are sanitized out of extension names)
                     # causes ui to break sometimes apparently
         ];
         enabledCustomApps = with spicePkgs.apps; [
