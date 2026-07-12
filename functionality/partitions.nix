@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    swapDevices = [{
-      device = "/swapfile";
-      size = 1024 * 12;
-    }];
+
 
   fileSystems."/home/fizzu/storage" = {
     device = "/dev/disk/by-uuid/63108475-f3e5-4e0f-bd85-19a546b82166";
@@ -27,6 +24,11 @@
       "x-systemd.requires=/dev/disk/by-uuid/14fef10b-a1c3-44b9-8bb3-39ecd22d3d6f"
     ];
   };
+  swapDevices = [{
+#       device = "/swapfile";
+      device = "/home/fizzu/extra/swapfile"; # the "extra" 20 gb partition
+      size = 1024 * 25;
+    }];
 
   # ensures the target directory exists
   systemd.tmpfiles.rules = [
