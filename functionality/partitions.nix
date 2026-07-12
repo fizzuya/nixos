@@ -24,11 +24,12 @@
       "x-systemd.requires=/dev/disk/by-uuid/14fef10b-a1c3-44b9-8bb3-39ecd22d3d6f"
     ];
   };
-  swapDevices = [{
-#       device = "/swapfile";
-      device = "/home/fizzu/extra/swapfile"; # the "extra" 20 gb partition
-      size = 1024 * 25;
-    }];
+  swapDevices = [
+      {device = "/swapfile" ; size = 1024 * 1; } # just do a minimum of 1 gb or it kinda shits itself bleegh
+      {device = "/home/fizzu/extra/swapfile" ; # the "extra" 30 gb partition
+          size = 1024 * 25;}
+  ];
+
 
   # ensures the target directory exists
   systemd.tmpfiles.rules = [
