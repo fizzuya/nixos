@@ -10,6 +10,7 @@
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -19,7 +20,7 @@
 
   };
 
-  outputs = { self, nixpkgs, nix-cachyos-kernel, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, systems, nix-cachyos-kernel, home-manager, spicetify-nix, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -61,7 +62,7 @@
         ./home.nix
         home-manager.nixosModules.home-manager
         {
-        home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];
     };

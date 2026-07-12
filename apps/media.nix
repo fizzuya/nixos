@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
     # this is ASS
@@ -7,7 +7,7 @@
     #     PIPEWIRE_QUANTUM = "128/1024";
     # };
     environment.systemPackages = with pkgs; [
-        spotify
+        spotify # spicetify has its own spotify i guess ?? buh
         spotube
         kdePackages.kolourpaint
     ];
@@ -21,11 +21,15 @@
         in
         {
         enable = true;
+        spotifyPackage = pkgs.spotify; # making it use same spotify as system
 
+        theme = spicePkgs.themes.catppuccin;
+        colorScheme = "mocha";
         enabledExtensions = with spicePkgs.extensions; [
             adblock
             hidePodcasts
-            shuffle # shuffle+ (special characters are sanitized out of extension names)
+#             shuffle # shuffle+ (special characters are sanitized out of extension names)
+                    # causes ui to break sometimes apparently
         ];
         enabledCustomApps = with spicePkgs.apps; [
             newReleases
@@ -33,11 +37,8 @@
         ];
         enabledSnippets = with spicePkgs.snippets; [
 #             rotatingCoverart
-            pointer
+#             pointer
         ];
-
-        theme = spicePkgs.themes.catppuccin;
-        colorScheme = "mocha";
         };
     };
 }
