@@ -55,8 +55,8 @@ in
 
 
         # driver package
-#         package = config.boot.kernelPackages.nvidiaPackages.stable;
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.stable; # bundled with kernel
+#         package = pkgs.nvidia_cachyos; # cachy specifically
 
         # open source or no (better be yes)
         open = true;

@@ -39,15 +39,17 @@
 
               # Only use one of the two overlays!
             ];
-            boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-
-            # ... your other configs
+            # boot.kernelPackages = pkgs.linuxPackages_latest;
+#             boot.kernelPackages = pkgs.linuxPackages_cachyos-latest;
+#             boot.kernelPackages = inputs.nix-cachyos-kernel.cachyosKernels.linuxPackages-cachyos-latest;
+            boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest;
+            boot.blacklistedKernelModules = [ "nova_core" ]; # some nvidia cachy bs
           }
         )
 
-        chaotic.nixosModules.nyx-cache
-        chaotic.nixosModules.nyx-overlay
-        chaotic.nixosModules.nyx-registry
+#         chaotic.nixosModules.nyx-cache
+#         chaotic.nixosModules.nyx-overlay
+#         chaotic.nixosModules.nyx-registry
         ./configuration.nix
         ./hardware-configuration.nix
 #         ./kernel.nix
