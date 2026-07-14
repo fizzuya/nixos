@@ -9,7 +9,16 @@
     environment.systemPackages = with pkgs; [
         spotify # spicetify has its own spotify i guess ?? buh
         spotube
+        yt-dlp
         kdePackages.kolourpaint
+        vlc
+        qbittorrent
+        (wrapOBS {
+            plugins = with obs-studio-plugins;[
+                obs-pipewire-audio-capture
+            ];
+        })
+        discord
     ];
 
     home-manager.users.fizzu = {inputs, ...}:{

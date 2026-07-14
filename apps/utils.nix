@@ -35,13 +35,7 @@
         # that works well in both system and firefox portal filepicker call
         thunar
         kdePackages.kcalc
-        qbittorrent
         _7zip-zstd
-        (wrapOBS {
-            plugins = with obs-studio-plugins;[
-                obs-pipewire-audio-capture
-            ];
-        })
     ];
 
     # NUKING the FUCK out of STUPID copilot key
