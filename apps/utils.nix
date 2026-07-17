@@ -36,6 +36,11 @@
         thunar
         kdePackages.kcalc
         _7zip-zstd
+
+        wireguard-tools
+        proton-vpn
+        mullvad-vpn
+
     ];
 
     # NUKING the FUCK out of STUPID copilot key
