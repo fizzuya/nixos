@@ -29,7 +29,7 @@
         spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
         in
         {
-        enable = false;
+        enable = true;
         spotifyPackage = pkgs.spotify; # making it use same spotify as system
 
         theme = spicePkgs.themes.catppuccin;

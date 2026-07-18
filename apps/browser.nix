@@ -89,12 +89,16 @@
             # middle mouse scroll stuff
             "general.autoScroll" = true;
             "middlemouse.paste" = false;
+            "browser.tabs.loadInBackground" = true;
+            "browser.tabs.loadBookmarksInBackground" = true;
+
             # IF to use portal as filepicker
                 # 0 is never
                 # 1 is always
                 # 2 is auto
             "widget.use-xdg-desktop-portal.file-picker" = 2;
         };
+        # home tab config
         "FirefoxHome" = {
             "SponsoredTopSites" = false;
 #             "Highlights": true | false;
