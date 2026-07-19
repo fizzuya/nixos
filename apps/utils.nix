@@ -7,10 +7,9 @@
 
         openrgb
         logiops
-        # keyd no need to mention it because services.keyd does the job for whatever reason
+        # keyd # no need to mention it because services.keyd does the job
 
-
-        vscode-fhs # idk what fhs is tbh but vscode ig
+#         vscode-fhs # idk what fhs is tbh but vscode ig
         (python314.withPackages (ps: with ps; # Python Set to ensure all is from one package
             [
                 tkinter
@@ -23,6 +22,7 @@
         pkgsCross.mingw32.buildPackages.gcc
         pkgsCross.mingwW64.buildPackages.gcc
         gnumake
+        vscodium
 
         gnugrep
         pciutils # pci devices database type shit idk sth along the lines
@@ -35,7 +35,13 @@
         # that works well in both system and firefox portal filepicker call
         thunar
         kdePackages.kcalc
+        btop
+        gotop
+        caligula # image burning util so no need for dd
+        switcheroo # image format converter
         _7zip-zstd
+
+        onlyoffice-desktopeditors
 
         wireguard-tools
         proton-vpn
