@@ -8,7 +8,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     systems.url = "github:nix-systems/default";
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+#     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -22,7 +22,7 @@
 
   };
 
-  outputs = { self, nixpkgs, systems, nix-cachyos-kernel, home-manager, spicetify-nix, chaotic, ... }@inputs: {
+  outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -31,7 +31,7 @@
           {
             nixpkgs.overlays = [
               # Use the exact nixpkgs revision as defined in this repo to ensure binary cache hits.
-              nix-cachyos-kernel.overlays.pinned
+#               nix-cachyos-kernel.overlays.pinned
 
               # Alternatively, use nixpkgs from your environment, nixpkgs.config will apply.
               # Note: may not hit binary cache; kernel will need to be built locally.
@@ -40,10 +40,8 @@
               # Only use one of the two overlays!
             ];
             boot.kernelPackages = pkgs.linuxPackages_latest;
-            # boot.kernelPackages = pkgs.linuxPackages_cachyos-latest;
             # boot.kernelPackages = inputs.nix-cachyos-kernel.cachyosKernels.linuxPackages-cachyos-latest;
-#             boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest;
-            boot.blacklistedKernelModules = [ "nova_core" ]; # some nvidia cachy bs
+#             boot.blacklistedKernelModules = [ "nova_core" ]; # some nvidia cachy bs
           }
         )
 
