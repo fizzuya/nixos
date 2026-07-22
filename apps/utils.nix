@@ -35,6 +35,8 @@
         # that works well in both system and firefox portal filepicker call
         thunar
         kdePackages.kcalc
+        kdePackages.kamoso
+        kdePackages.kdenlive
         btop
         gotop
         caligula # image burning util so no need for dd
