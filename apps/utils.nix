@@ -38,7 +38,6 @@
         kdePackages.kamoso
         kdePackages.kdenlive
         btop
-        gotop
         caligula # image burning util so no need for dd
         switcheroo # image format converter
         _7zip-zstd

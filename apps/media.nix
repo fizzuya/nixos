@@ -3,8 +3,8 @@
 {
     # this is ASS
     # environment.sessionVariables = {
-    #     PIPEWIRE_LATENCY = "128/48000";
-    #     PIPEWIRE_QUANTUM = "128/1024";
+    #     PIPEWIRE_LATENCY = "48000";
+    #     PIPEWIRE_QUANTUM = "1024/2048";
     # };
     environment.systemPackages = with pkgs; [
         spotify # spicetify has its own spotify i guess ?? buh
