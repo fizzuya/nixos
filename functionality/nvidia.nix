@@ -39,8 +39,9 @@ in
 
     # for offload,, i guess
     # https://nixos.wiki/wiki/Nvidia
-    services.xserver.videoDrivers = [
-        "amdgpu"  # example for Intel iGPU; use "amdgpu" here instead if your iGPU is AMD
+    services.xserver.videoDrivers = [   # which video drivers to use in general
+                                        # amdgpu / nvidia / some bullshit for intel i dont rembemer
+        "amdgpu"
         "nvidia"
     ];
 
