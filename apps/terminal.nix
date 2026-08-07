@@ -43,6 +43,7 @@ in
                 gitdiff = "sudo git diff";
                 gitcheckout = "sudo git checkout";
                 githist    = "sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
+                archive = "7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%d-%m-%Y).7z\" /etc/nixos";
             };
         };
     };
