@@ -46,9 +46,11 @@
 
         wireguard-tools
         proton-vpn
-        mullvad-vpn
+#         mullvad-vpn # this doesnt work bc it needs a service and if you turn on the service then it installs it anyway so theres that
 
     ];
+
+    services.mullvad-vpn.enable = true;
 
     # NUKING the FUCK out of STUPID copilot key
     services.keyd = {
