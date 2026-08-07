@@ -19,7 +19,7 @@
             ]
         ))
         gcc # The GNU Compiler Collection includes compiler front ends for C, C++, Objective-C, Fortran, OpenMP for C/C++/Fortran, and Ada, as well as libraries for these languages (libstdc++, libgomp,…).
-        pkgsCross.mingw32.buildPackages.gcc
+        pkgsCross.mingw32.buildPackages.gcc # i needed these for something specific but don't remember what it was. maybe not needed. not gonna bother checking. maybe i was trying to make spore work?
         pkgsCross.mingwW64.buildPackages.gcc
         gnumake
         vscodium
@@ -34,11 +34,15 @@
         # thunar bc its gtk and firefox is gtk so i have an actual filepicker
         # that works well in both system and firefox portal filepicker call
         thunar
+
+        # cant be bothered with managing kde right now so ill just throw some bullshit in here idc
+        # TODO: replace these with non-kde variants that don't require to install an entire god damn DE
         kdePackages.kcalc
         kdePackages.kamoso
         kdePackages.kdenlive
+
         btop
-        caligula # image burning util so no need for dd
+        caligula # image burning util so no need for dd if= of=
         switcheroo # image format converter
         _7zip-zstd
 
@@ -50,6 +54,7 @@
 
     ];
 
+    #enabling mullvad via service bc just adding package doesnt work
     services.mullvad-vpn.enable = true;
 
     # NUKING the FUCK out of STUPID copilot key
@@ -72,6 +77,7 @@
     hardware.logitech.wireless.enable = true; # idk if necessary
 
     # for mouse rgb control
+    # TODO: manage to write a profile declaratively at some point maybe perhapenchance
     services.hardware.openrgb = with pkgs;{
         package = pkgs.openrgb-with-all-plugins;
         enable = true;
@@ -108,7 +114,7 @@
         };
     };
 
-    # FUUUUUUUUUUUUUUUUUUUUUUCK THAT THING ABOVE WORKS INSTEAD OF THIS VILE DOGSHIT UUUUUUUUUGH
+    # THAT THING ABOVE WORKS INSTEAD OF THIS VILE DOGSHIT OUGHHGHG
     # make a service that controls rgb with more user-agency but i fucked it up somehow somewhere probably in packages
 #     systemd.services.mouse-rgb = {
 #         after = [ "openrgb.service" ];
