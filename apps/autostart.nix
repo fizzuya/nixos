@@ -7,7 +7,9 @@
         wants = [ "graphical-session.target" ];
         wantedBy = [ "graphical-session.target" ];
         serviceConfig = {
-            ExecStart = "${config.programs.steam.package}/bin/steam -silent -console";
+            ExecStart = ''
+            ${config.programs.steam.package}/bin/steam -silent -console
+            '';
             Restart = "on-failure";
             RestartSec = 5;
 #             Type = "oneshot";

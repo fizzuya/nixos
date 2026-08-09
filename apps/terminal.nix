@@ -32,9 +32,10 @@ in
 
             shellAliases = {
                 rebuild = "sudo nixos-rebuild switch --flake /etc/nixos";
-                update = "gitgo && sudo nix flake update && rebuild && fladd && flcommit";
-                fladd = "gitgo && gitadd flake.lock";
-                flcommit = "gitgo && gitcommit -m 'updated flake'";
+                update = "gitgo && sudo nix flake update && rebuild";
+
+#                 fladd = "gitgo && gitadd flake.lock";
+                flcommit = "gitgo && gitadd flake.lock && gitgo && gitcommit -m 'updated flake'";
                 gitgo   = "cd /etc/nixos";
                 gitstatus  = "sudo git status";
                 gitadd     = "sudo git add";
