@@ -39,9 +39,6 @@
 
               # Only use one of the two overlays!
             ];
-            boot.kernelPackages = pkgs.linuxPackages_latest;
-            # boot.kernelPackages = inputs.nix-cachyos-kernel.cachyosKernels.linuxPackages-cachyos-latest;
-#             boot.blacklistedKernelModules = [ "nova_core" ]; # some nvidia cachy bs
           }
         )
 
@@ -50,8 +47,8 @@
 #         chaotic.nixosModules.nyx-registry
         ./configuration.nix
         ./hardware-configuration.nix
-#         ./kernel.nix
 
+        ./functionality/kernel.nix
         ./functionality/bluetooth.nix
         ./functionality/partitions.nix
         ./functionality/nvidia.nix
