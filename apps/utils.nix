@@ -41,7 +41,8 @@
         kdePackages.kamoso
         kdePackages.kdenlive
 
-        btop
+#         btop # removed bc having it here fucks up custom wrapper in terminal.nix that gives path to the gpu akin to a command below:
+                # ; LD_LIBRARY_PATH=/run/opengl-driver/lib btop
         caligula # image burning util so no need for dd if= of=
         switcheroo # image format converter
         _7zip-zstd
