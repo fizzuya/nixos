@@ -60,7 +60,7 @@ in
 #         package = pkgs.nvidia_cachyos; # cachy specifically
 
         # open source or no (better be yes)
-        open = true;
+        open = false;
 
         # either offlaod or sync
         prime = {

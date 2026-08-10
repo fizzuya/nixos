@@ -35,7 +35,7 @@ in
                 update = "gitgo && sudo nix flake update && rebuild";
 
 #                 fladd = "gitgo && gitadd flake.lock";
-                flcommit = "gitgo && gitadd flake.lock && gitgo && gitcommit -m 'updated flake'";
+                flcommit = "gitgo && gitadd flake.lock && gitcommit -m 'updated flake'";
                 gitgo   = "cd /etc/nixos";
                 gitstatus  = "sudo git status";
                 gitadd     = "sudo git add";
@@ -44,7 +44,7 @@ in
                 gitdiff = "sudo git diff";
                 gitcheckout = "sudo git checkout";
                 githist    = "sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
-                archive = "7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%d-%m-%Y).7z\" /etc/nixos";
+                archive = "7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%Y-%m-%d).7z\" /etc/nixos";
             };
         };
     };

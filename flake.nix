@@ -8,7 +8,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     systems.url = "github:nix-systems/default";
 
-#     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -22,7 +22,7 @@
 
   };
 
-  outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, ... }@inputs: {
+  outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, nix-cachyos-kernel, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -45,6 +45,7 @@
 #         chaotic.nixosModules.nyx-cache
 #         chaotic.nixosModules.nyx-overlay
 #         chaotic.nixosModules.nyx-registry
+
         ./configuration.nix
         ./hardware-configuration.nix
 

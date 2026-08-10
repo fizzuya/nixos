@@ -28,6 +28,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # linux kernel:
+          # is in ./functionality/kernel.nix
 #   boot.kernelPackages = pkgs.linuxPackages_latest;
 #   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 #   boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
