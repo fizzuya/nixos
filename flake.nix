@@ -25,26 +25,28 @@
   outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, nix-cachyos-kernel, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = [
         (
           { pkgs, ... }:
           {
             nixpkgs.overlays = [
               # Use the exact nixpkgs revision as defined in this repo to ensure binary cache hits.
+              # to not compile kernel locally each time
 #               nix-cachyos-kernel.overlays.pinned
 
               # Alternatively, use nixpkgs from your environment, nixpkgs.config will apply.
               # Note: may not hit binary cache; kernel will need to be built locally.
-              # nix-cachyos-kernel.overlays.default
+#               nix-cachyos-kernel.overlays.default
 
               # Only use one of the two overlays!
             ];
           }
         )
-
-#         chaotic.nixosModules.nyx-cache
-#         chaotic.nixosModules.nyx-overlay
-#         chaotic.nixosModules.nyx-registry
+        # for cachyos kernel;
+        chaotic.nixosModules.nyx-cache
+        chaotic.nixosModules.nyx-overlay
+        chaotic.nixosModules.nyx-registry
 
         ./configuration.nix
         ./hardware-configuration.nix
@@ -67,6 +69,7 @@
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
+
       ];
     };
   };

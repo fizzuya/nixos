@@ -1,6 +1,11 @@
 { config, pkgs, inputs, ... }:
 let
-cachykernel = inputs.nix-cachyos-kernel.cachyosKernels.linuxPackages-cachyos-latest;
+    # i dont knowwwww uaaaa
+# cachykernel = inputs.nix-cachyos-kernel.cachyosKernels.linuxPackages-cachyos-latest;
+cachykernel = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
+# cachykernel = pkgs.linuxPackages-cachyos-latest;
+# cachykernel = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # using overlays which would cause a rebuild on every minor change
+
 linuxlatest = pkgs.linuxPackages_latest;
 linux_7_1_4 = pkgs.linuxPackagesFor (pkgs.linux_7_1.override {
             argsOverride = rec {
@@ -14,5 +19,5 @@ linux_7_1_4 = pkgs.linuxPackagesFor (pkgs.linux_7_1.override {
         });
 in
 {
-    boot.kernelPackages = linux_7_1_4;
+    boot.kernelPackages = cachykernel;
 }
