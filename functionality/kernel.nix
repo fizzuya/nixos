@@ -2,7 +2,7 @@
 let
     # i dont knowwwww uaaaa
 # cachykernel = inputs.nix-cachyos-kernel.cachyosKernels.linuxPackages-cachyos-latest;
-cachykernel = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
+cachykernel = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages-cachyos-latest;
 # cachykernel = pkgs.linuxPackages-cachyos-latest;
 # cachykernel = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # using overlays which would cause a rebuild on every minor change
 
