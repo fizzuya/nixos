@@ -54,7 +54,7 @@
         ./functionality/kernel.nix
         ./functionality/bluetooth.nix
         ./functionality/partitions.nix
-        ./functionality/nvidia.nix
+        ./functionality/graphics.nix
 
         ./apps/gaming.nix
         ./apps/browser.nix

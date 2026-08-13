@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 
-
 let
     # configurable nvidia-offload
     # requires enableOffloadCmd = false; otherwise it will get overridden
@@ -13,31 +12,49 @@ let
         exec "$@"
     '';
 
-    offload = {
+    busses = {
         # Make sure to use the correct Bus ID values
         # sudo lshw -c display ; needs lshw
         # or
         # sudo lspci -nn | grep -i nvidia/amd/vga
         nvidiaBusId = "PCI:1:0:0";
         amdgpuBusId = "PCI:6:0:0";
+    };
+
+    # offload primarily uses iGPU and calls for dGPU when necessary
+    offload = {
+        inherit (busses) nvidiaBusId amdgpuBusId;
 
         offload = {
             enable = true;
             enableOffloadCmd = false; # false for custom-offload
         };
-        sync = {
-            enable = false;
-        };
+        sync.enable = false;
+        reverseSync.enable = false;
+    };
 
-        };
-
+    # sync renders everything on dGPU and iGPU only copies things from it to output to a display
+    # dGPU never sleeps while unneeded
     sync = {
-            nvidiaBusId = "PCI:1:0:0";
-            amdgpuBusId = "PCI:6:0:0";
+        inherit (busses) nvidiaBusId amdgpuBusId;
 
-            sync.enable = true;
-            offload.enable = false;
-        };
+        offload.enable = false;
+        sync.enable = true;
+        reverseSync.enable = false;
+    };
+
+    # same as sync but dGPU is the primary output device to things that are wired to it
+    # not really needed for me i think but eh why not
+    reverse-sync = {
+        inherit (busses) nvidiaBusId amdgpuBusId;
+
+        offload.enable = false;
+        sync.enable = false;
+        reverseSync.enable = true;
+    };
+
+    # either offlaod or sync
+    primeconfig = sync;
 
 in
 
@@ -74,24 +91,25 @@ in
     ];
 
     hardware.nvidia = {
+        # wayland stuff
         modesetting.enable = true;
+        # sleep stuff i think
         nvidiaPersistenced = true;
 
+        # open source or no
+        open = false;
+        prime = primeconfig;
+
         powerManagement.enable = true;      # Enable NVIDIA suspend/hibernate hooks (nvidia-suspend.service, etc.)
-        powerManagement.finegrained = true; # Fine-grained power management (recommended for Turing+ GPUs, Optimus setups)
+#         powerManagement.finegrained = false; # requires offload
+        powerManagement.finegrained = if primeconfig.offload.enable then true else false; # requires offload
 
         nvidiaSettings = true;
-
 
         # driver package
         package = config.boot.kernelPackages.nvidiaPackages.stable; # bundled with kernel
 #         package = pkgs.nvidia_cachyos; # cachy specifically
 
-        # open source or no (better be yes)
-        open = false;
-
-        # either offlaod or sync
-        prime = offload;
     };
 
 
