@@ -46,6 +46,7 @@
         caligula # image burning util so no need for dd if= of=
         switcheroo # image format converter
         _7zip-zstd
+        unrar
 
         onlyoffice-desktopeditors
 

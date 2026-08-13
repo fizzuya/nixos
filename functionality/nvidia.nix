@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 
-# configurable nvidia-offload
-# requires enableOffloadCmd = false; otherwise it will get overridden
 let
+    # configurable nvidia-offload
+    # requires enableOffloadCmd = false; otherwise it will get overridden
     custom-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
         export __NV_PRIME_RENDER_OFFLOAD=1
         export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -12,7 +12,35 @@ let
         export WINE_DISABLE_HARDWARE_SCHEDULING=0
         exec "$@"
     '';
+
+    offload = {
+        # Make sure to use the correct Bus ID values
+        # sudo lshw -c display ; needs lshw
+        # or
+        # sudo lspci -nn | grep -i nvidia/amd/vga
+        nvidiaBusId = "PCI:1:0:0";
+        amdgpuBusId = "PCI:6:0:0";
+
+        offload = {
+            enable = true;
+            enableOffloadCmd = false; # false for custom-offload
+        };
+        sync = {
+            enable = false;
+        };
+
+        };
+
+    sync = {
+            nvidiaBusId = "PCI:1:0:0";
+            amdgpuBusId = "PCI:6:0:0";
+
+            sync.enable = true;
+            offload.enable = false;
+        };
+
 in
+
 {
     nixpkgs.config.allowUnfree = true;
 
@@ -63,24 +91,7 @@ in
         open = false;
 
         # either offlaod or sync
-        prime = {
-            # Make sure to use the correct Bus ID values
-            # sudo lshw -c display ; needs lshw
-            # or
-            # sudo lspci -nn | grep -i nvidia/amd/vga
-            nvidiaBusId = "PCI:1:0:0";
-            amdgpuBusId = "PCI:6:0:0";
-
-            offload = {
-                enable = true;
-                enableOffloadCmd = false;
-            };
-
-            sync = {
-                enable = false;
-            };
-
-        };
+        prime = offload;
     };
 
 
