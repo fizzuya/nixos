@@ -48,6 +48,7 @@ in
                 doall = "gitgo && gitadd -A && rebuild";
                 gitdiff = "gitgo && sudo git diff";
                 gitcheckout = "gitgo && sudo git checkout";
+                gitpush = "gitgo && sudo git push";
                 githist    = "gitgo && sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
                 archive = "7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%Y-%m-%d).7z\" /etc/nixos";
             };
