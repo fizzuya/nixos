@@ -87,7 +87,7 @@
     services.hardware.openrgb = with pkgs;{
         package = pkgs.openrgb-with-all-plugins;
         enable = true;
-        startupProfile = "/home/fizzu/.config/OpenRGB/pink-cyan.orp";
+        startupProfile = "/etc/nixos/apps/OpenRGB/pink-cyan.orp";
     };
     # restart openrgb on wakeup
     powerManagement.resumeCommands = ''
