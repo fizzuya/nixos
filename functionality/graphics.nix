@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 let
+
+    # either offlaod or sync
+    primeconfig = sync;
+
     # configurable nvidia-offload
     # requires enableOffloadCmd = false; otherwise it will get overridden
     custom-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
@@ -52,9 +56,6 @@ let
         sync.enable = false;
         reverseSync.enable = true;
     };
-
-    # either offlaod or sync
-    primeconfig = sync;
 
 in
 
