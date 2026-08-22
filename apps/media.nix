@@ -1,14 +1,13 @@
 { config, pkgs, inputs, ... }:
 
+let
+    antra = import ./appimages/antra.nix {inherit pkgs;};
+in
 {
-    # this is ASS
-    # environment.sessionVariables = {
-    #     PIPEWIRE_LATENCY = "48000";
-    #     PIPEWIRE_QUANTUM = "1024/2048";
-    # };
     environment.systemPackages = with pkgs; [
         spotify # spicetify has its own spotify i guess ?? buh
         spotube
+        antra
         yt-dlp
         kdePackages.kolourpaint
         vlc

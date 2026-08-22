@@ -1,50 +1,60 @@
-
 { pkgs, ... }:
 
 let
+    fetchurl = pkgs.fetchurl;
+    appimageTools = pkgs.appimageTools;
 
-  fetchurl = pkgs.fetchurl;
-  appimageTools = pkgs.appimageTools;
+    version = "1.1.8";
+    pname = "antra";
 
-  version = "1.1.8";
-  pname = "antra";
+    src = fetchurl {
+        url = "https://github.com/anandprtp/Antra/releases/download/v${version}/Antra-Linux.AppImage";
+        hash = "sha256-g+x5ap/6nqdeVccdV1kz3kBg9y6fbplXIp+uBr75790=";
+    };
 
-  src = fetchurl {
-    url = "https://github.com{version}/Antra-Linux.AppImage";
-    hash = "sha256-vXNVDVtvfiQuXthP0NHPFdNvvMTkGpx0UP8oddIWbNk=";
-  };
-
-  appimageContents = pkgs.appimageTools.extract {inherit pname version src;};
-
+    appimageContents = appimageTools.extract {inherit pname version src;};
 in
-    pkgs.appimageTools.wrapType2 {
-      inherit pname version src;
 
-      extraPkgs = pkgs: with pkgs; [
-        webkit2gtk_4_1
+appimageTools.wrapType2 {
+    inherit pname version src;
+
+    extraPkgs = pkgs: with pkgs; [
+        libsoup_3
+        webkitgtk_4_1
         glib-networking
         openssl
+    ];
 
-        # override doesn't preserve splicing https://github.com/NixOS/nixpkgs/issues/132651
-        (buildPackages.wrapGAppsHook.override {inherit (buildPackages) makeWrapper;})
-      ];
+    extraInstallCommands = ''
+        # installing the thing
+        install -m 444 -D ${appimageContents}/*.desktop $out/share/applications/${pname}.desktop
 
-      pkgs = pkgs;
-      extraInstallCommands = ''
-        install -m 444 -D ${appimageContents}/${pname}.desktop -t $out/share/applications
-        substituteInPlace $out/share/applications/${pname}.desktop \
-          --replace 'Exec=AppRun' 'Exec=${pname}'
+#         substituteInPlace $out/share/applications/${pname}.desktop \
+#           --replace-fail 'Exec=AppRun' 'Exec=${pname}'
+
+        # substituteInPlace is bitching because it doesnt see the equivalent of Exec=AppRun inside antra.desktop so gotta normalize the thing inside and use this
+        chmod +w $out/share/applications/${pname}.desktop
+        sed -i 's|^Exec=.*|Exec=${pname}|g' $out/share/applications/${pname}.desktop
+
+        # icons
         cp -r ${appimageContents}/usr/share/icons $out/share
 
-        # unless linked, the binary is placed in $out/bin/cursor-someVersion
+        # unless linked, the binary is placed in $out/bin/pname-version
         # ln -s $out/bin/${pname}-${version} $out/bin/${pname}
+
+        # iunno just slop
+#         wrapProgram $out/bin/${pname}-${version} \
+#         --prefix GIO_EXTRA_MODULES : "${pkgs.glib-networking}/lib/gio/modules" \
+#         --prefix XDG_DATA_DIRS : "${pkgs.gsettings-desktop-schemas}/share" \
+#         --suffix XDG_DATA_DIRS : "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
       '';
 
-      extraBwrapArgs = [
-        "--bind-try /etc/nixos/ /etc/nixos/"
-      ];
+    dieWithParent = false;
+}
 
-      # vscode likes to kill the parent so that the
-      # gui application isn't attached to the terminal session
-      dieWithParent = false;
-    }
+
+
+
+
+
+
