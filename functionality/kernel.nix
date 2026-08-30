@@ -19,5 +19,5 @@ linux_7_1_4 = pkgs.linuxPackagesFor (pkgs.linux_7_1.override {
         });
 in
 {
-    boot.kernelPackages = cachykernel;
+    boot.kernelPackages = linuxlatest;
 }
