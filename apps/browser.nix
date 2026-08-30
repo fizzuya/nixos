@@ -1,13 +1,14 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = [
-    pkgs.chromium
+#     pkgs.chromium
   ];
 
   xdg.mime.defaultApplications = {
     "text/html" = "firefox.desktop";
     "x-scheme-handler/http" = "firefox.desktop";
     "x-scheme-handler/https" = "firefox.desktop";
+    "default-web-browser" = "firefox.desktop";
   };
 
   # configuring xdg to use gtk as default portal
