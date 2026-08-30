@@ -40,7 +40,7 @@ in
                 update = "gitgo && sudo nix flake update && rebuild";
 
 #                 fladd = "gitgo && gitadd flake.lock";
-                flcommit = "gitgo && gitadd flake.lock && gitcommit -m 'updated flake'";
+                flcommit = "gitadd flake.lock && gitcommit -m 'updated flake'";
                 gitgo   = "cd /etc/nixos";
                 gitstatus  = "sudo git status";
                 gitadd     = "sudo git add";
