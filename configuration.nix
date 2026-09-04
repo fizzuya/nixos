@@ -7,17 +7,7 @@
 {
   imports =
     [
-#       ./hardware-configuration.nix
-#
-#       ./functionality/bluetooth.nix
-#       ./functionality/partitions.nix
-#
-#       ./apps/gaming.nix
-#
-#       ./apps/browser.nix
-#
-#       ./apps/terminal.nix
-#       ./apps/utils.nix
+#       ./hardware-configuration.nix # and such
     ];
 
   # Flakes
@@ -26,13 +16,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # linux kernel:
-          # is in ./functionality/kernel.nix
-#   boot.kernelPackages = pkgs.linuxPackages_latest;
-#   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-#   boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-latest;
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -110,7 +93,7 @@
     description = "fizzu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
+#       kdePackages.kate
     #  thunderbird
     ];
   };

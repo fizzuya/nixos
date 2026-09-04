@@ -40,6 +40,7 @@
         kdePackages.kcalc
         kdePackages.kamoso
         kdePackages.kdenlive
+        kdePackages.kate
 
 #         btop # removed bc having it here fucks up custom wrapper in terminal.nix that gives path to the gpu akin to a command below:
                 # ; LD_LIBRARY_PATH=/run/opengl-driver/lib btop

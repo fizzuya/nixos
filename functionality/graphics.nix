@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 let
-
-    # either offlaod or sync
+    # either offlaod or sync, configured below
     primeconfig = sync;
 
     # configurable nvidia-offload
@@ -56,7 +55,6 @@ let
         sync.enable = false;
         reverseSync.enable = true;
     };
-
 in
 
 {
