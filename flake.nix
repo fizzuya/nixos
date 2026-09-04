@@ -63,6 +63,8 @@
         ./apps/media.nix
         ./apps/autostart.nix
 
+        ./desktop/kde.nix
+
 
         ./home.nix
         home-manager.nixosModules.home-manager
