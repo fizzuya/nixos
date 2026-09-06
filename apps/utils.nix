@@ -10,6 +10,7 @@
         # keyd # no need to mention it because services.keyd does the job
 
 #         vscode-fhs # idk what fhs is tbh but vscode ig
+        vscodium
         (python314.withPackages (ps: with ps; # Python Set to ensure all is from one package
             [
                 tkinter
@@ -22,7 +23,8 @@
         pkgsCross.mingw32.buildPackages.gcc # i needed these for something specific but don't remember what it was. maybe not needed. not gonna bother checking. maybe i was trying to make spore work?
         pkgsCross.mingwW64.buildPackages.gcc
         gnumake
-        vscodium
+        dotnetCorePackages.sdk_10_0-bin # to run vintagestory natively in lutris
+        coreutils
 
         gnugrep
         pciutils # pci devices database type shit idk sth along the lines
@@ -57,6 +59,10 @@
                     # vpn would work without it with gui but it'd need to be run with a terminal
 
     ];
+
+    environment.sessionVariables = {
+        DOTNET_ROOT = "${pkgs.dotnetCorePackages.runtime_10_0-bin}/share/dotnet"; # for vintagestory, dont forget to set custom in lutris game conf if running via wine
+    };
 
     #enabling mullvad via service bc just adding package doesnt work, also making it have a gui
     services.mullvad-vpn = {

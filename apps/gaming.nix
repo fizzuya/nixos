@@ -31,7 +31,8 @@
         gamescope
 
         wineWow64Packages.stable
-        winetricks ];
+        winetricks
+    ];
 
     environment.sessionVariables = {
         PROTON_ENABLE_WAYLAND="1";
