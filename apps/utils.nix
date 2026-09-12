@@ -7,7 +7,7 @@
 
         openrgb
         logiops
-        # keyd # no need to mention it because services.keyd does the job
+        keyd
 
 #         vscode-fhs # idk what fhs is tbh but vscode ig
         vscodium
