@@ -1,5 +1,5 @@
 {
-  description = "flake main ig idfk";
+  description = "flake config";
 
   inputs = {
     # default NixOS unstable branch
@@ -25,7 +25,7 @@
   outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, nix-cachyos-kernel, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs; username = "fizzu";};
       modules = [
         (
           { pkgs, ... }:
