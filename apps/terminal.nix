@@ -50,7 +50,7 @@ in
                 gitcheckout = "sudo git checkout";
                 gitpush = "sudo git push";
                 githist    = "sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
-                archive = "7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%Y-%m-%d).7z\" /etc/nixos";
+                archive = "sudo 7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%Y-%m-%d).7z\" /etc/nixos";
             };
         };
     };
