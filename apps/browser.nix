@@ -90,8 +90,11 @@
             # middle mouse scroll stuff
             "general.autoScroll" = true;
             "middlemouse.paste" = false;
+            # bookmark stuff. so the opened tab isnt forced into view.. i think. don't remember exactly
             "browser.tabs.loadInBackground" = true;
             "browser.tabs.loadBookmarksInBackground" = true;
+            # so the browser saves the image logs in "network" debug screen if i need them after they're gone
+            "browser.menu.showViewImageInfo" = true;
 
             # IF to use portal as filepicker
                 # 0 is never
