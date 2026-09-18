@@ -35,7 +35,7 @@
     ];
 
     environment.sessionVariables = {
-        PROTON_ENABLE_WAYLAND="1";
+#         PROTON_ENABLE_WAYLAND="1"; # if uncommented it fucks up up steam overlay on proton-GE and more
 
         PROTON_HIDE_NVIDIA_GPU="0";
         PROTON_NVIDIA_LIBS="1";
