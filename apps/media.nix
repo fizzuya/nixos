@@ -9,15 +9,16 @@ in
         spotube
         antra
 
+        yt-dlp
+
+        vlc
         tauon # pretty good for what i want despite ui being a bit meh
         deadbeef # same as tauon bc gnomve otherwise pretty good
 #         audacious # pretty good but for some godforsaken reason they decided to make volume slider embedded into a button what the actual fuck are they mentally challenged
 #         rhythmbox # ass
 #         amarok # eh + overcomplicated + stupid + chud + explode
 
-        yt-dlp
         kdePackages.kolourpaint
-        vlc
         qbittorrent
         (wrapOBS {
             plugins = with obs-studio-plugins;[
