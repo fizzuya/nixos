@@ -50,6 +50,7 @@
         switcheroo # image format converter
         _7zip-zstd
         unrar
+        qdirstat # graphical disk usage visualizer
 
         onlyoffice-desktopeditors
 
@@ -57,7 +58,6 @@
         proton-vpn
         mullvad-vpn # "application" part of mullvad, needed so kde sees it as an app for example.
                     # vpn would work without it with gui but it'd need to be run with a terminal
-
     ];
 
     environment.sessionVariables = {
