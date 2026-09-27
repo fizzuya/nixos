@@ -12,6 +12,10 @@
 #         };
 #     };
 # in
+let
+    llauncher-endfield = import ./appimages/llauncher-endfield.nix {inherit pkgs;};
+in
+
 {
     environment.systemPackages = with pkgs; [
         lutris
@@ -21,6 +25,7 @@
         })
         min-ed-launcher
         deadlock-mod-manager
+        llauncher-endfield
 
         protonplus
         protontricks
