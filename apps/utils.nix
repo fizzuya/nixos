@@ -55,6 +55,7 @@
 
         onlyoffice-desktopeditors
 
+        nethogs # network usage by processes
         wireguard-tools
         proton-vpn
         mullvad-vpn # "application" part of mullvad, needed so kde sees it as an app for example.
