@@ -5,7 +5,10 @@ let
     source = "/etc/nixos/apps/utils/OpenRGB";
 #     profile-name = "pink-cyan";
     profile-file = "${profile-name}.orp";
-    config-path = "${config.users.users.${username}.home}/.config/OpenRGB";
+    config-path = "${config.users.users.${username}.home}/.config/OpenRGB/";
+    config-path2 = "/var/lib/OpenRGB/";
+
+    # apparently /var/lib/OpenRGB/profiles/ is related
 in
 {
     environment.systemPackages = with pkgs; [
@@ -13,9 +16,9 @@ in
     ];
 
     systemd.services.openrgb-bullshit = with pkgs;{
-        after = [ "multi-user.target" "openrgb.service" ];
+        after = [ "multi-user.target" "openrgb.service" "suspend.target "];
+        wantedBy = [ "multi-user.target" "suspend.target" ];
         wants = [ "openrgb.service" ];
-        wantedBy = [ "multi-user.target" ];
         serviceConfig = {
             User = "root";
             # writeshellscript bc no innate support for multiline bullshit in ExecStart
