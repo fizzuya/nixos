@@ -1,0 +1,155 @@
+{
+    "controllers": [
+        {
+            "active_mode": 0,
+            "colors": [
+                15258960,
+                6561450,
+                15258960
+            ],
+            "description": "Logitech Mouse Device",
+            "display_name": "",
+            "flags": 1,
+            "leds": [
+                {
+                    "name": "Mouse Left"
+                },
+                {
+                    "name": "Mouse Center"
+                },
+                {
+                    "name": "Mouse Right"
+                }
+            ],
+            "location": "HID: /dev/hidraw1",
+            "modes": [
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 1,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 32,
+                    "name": "Direct",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 0,
+                    "name": "Off",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 0,
+                    "brightness_max": 0,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 64,
+                    "name": "Static",
+                    "speed": 0,
+                    "speed_max": 0,
+                    "speed_min": 0
+                },
+                {
+                    "brightness": 20,
+                    "brightness_max": 20,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 17,
+                    "name": "Cycle",
+                    "speed": 0,
+                    "speed_max": 1000,
+                    "speed_min": 20000
+                },
+                {
+                    "brightness": 20,
+                    "brightness_max": 20,
+                    "brightness_min": 0,
+                    "color_mode": 2,
+                    "colors": [
+                        0
+                    ],
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 81,
+                    "name": "Breathing",
+                    "speed": 0,
+                    "speed_max": 1000,
+                    "speed_min": 20000
+                },
+                {
+                    "brightness": 20,
+                    "brightness_max": 20,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 19,
+                    "name": "Wave",
+                    "speed": 0,
+                    "speed_max": 1000,
+                    "speed_min": 20000
+                },
+                {
+                    "brightness": 20,
+                    "brightness_max": 20,
+                    "brightness_min": 0,
+                    "color_mode": 0,
+                    "colors_max": 0,
+                    "colors_min": 0,
+                    "direction": 0,
+                    "flags": 17,
+                    "name": "Colormixing",
+                    "speed": 0,
+                    "speed_max": 1000,
+                    "speed_min": 20000
+                }
+            ],
+            "name": "Logitech G203 Lightsync",
+            "serial": "204F30674746",
+            "type": 6,
+            "vendor": "Logitech",
+            "version": "",
+            "zones": [
+                {
+                    "display_name": "",
+                    "flags": 4096,
+                    "leds_count": 3,
+                    "leds_max": 3,
+                    "leds_min": 3,
+                    "matrix_map": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "name": "Mouse Zone",
+                    "type": 1
+                }
+            ]
+        }
+    ],
+    "profile_name": "pink-cyan",
+    "profile_version": 6
+}

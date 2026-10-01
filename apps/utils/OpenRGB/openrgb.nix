@@ -2,11 +2,11 @@
 { config, pkgs, username, ... }:
 
 let
-    source = "/etc/nixos/apps/utils/OpenRGB";
-#     profile-name = "pink-cyan";
+    source = "/etc/nixos/apps/utils/OpenRGB/";
+#     profile-name = "cyan";
     profile-file = "${profile-name}.orp";
     config-path = "${config.users.users.${username}.home}/.config/OpenRGB/";
-    config-path2 = "/var/lib/OpenRGB/";
+    json-path-idk = "/var/lib/OpenRGB/";
 
     # apparently /var/lib/OpenRGB/profiles/ is related
 in
@@ -16,7 +16,7 @@ in
     ];
 
     systemd.services.openrgb-bullshit = with pkgs;{
-        after = [ "multi-user.target" "openrgb.service" "suspend.target "];
+        after = [ "multi-user.target" "openrgb.service" "suspend.target" ];
         wantedBy = [ "multi-user.target" "suspend.target" ];
         wants = [ "openrgb.service" ];
         serviceConfig = {
@@ -27,15 +27,15 @@ in
             ${bash}/bin/bash -c '${coreutils}/bin/sleep 1
 
             # create folder and copy stuffs into it
-            ${coreutils}/bin/mkdir -p "${config-path}"
-            cp ${source}/${profile-file} ${config-path}/${profile-file}
+            ${coreutils}/bin/mkdir -p "${json-path-idk}/profiles"
+            cp ${source}/*.json ${json-path-idk}/profiles
 
-            # set permissions to actual user we doing stuff for
-            ${coreutils}/bin/chown -R ${username}:users "${config-path}"
+            # restarting openrgb bc its a giga bitch
+            ${systemd}/bin/systemctl restart openrgb
 
             # doing the thing
                 echo "profile: openrgb --profile ${profile-name}"
-            ${openrgb}/bin/openrgb --config "${config-path}" --profile ${profile-name}'
+            ${openrgb}/bin/openrgb --config "${json-path-idk}" --profile ${profile-name}'
             '';
             Type = "oneshot";
         };
