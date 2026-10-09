@@ -8,7 +8,7 @@ let
   pname = "llauncher-endfield";
 
   src = fetchurl {
-    url = "https://github.com{version}/LLauncher_${version}_amd64.AppImage"; # Fixed URL interpolation syntax error
+    url = "https://github.com/AugustLigh/LLauncher/releases/download/${version}/LLauncher_${version}_amd64.AppImage";
     hash = "sha256-sSeWmncHf+nYOtAgk2HjsfM8dwlrHo6QxHT9ttArve4=";
   };
 
