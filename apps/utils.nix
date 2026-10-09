@@ -32,6 +32,7 @@
         wget
         busybox # a fuck ton of unix utils
                 # lspci # is in there too which i need
+        dmidecode # Tool that reads information about your system's hardware from the BIOS
 
         # thunar bc its gtk and firefox is gtk so i have an actual filepicker
         # that works well in both system and firefox portal filepicker call
