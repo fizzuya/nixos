@@ -56,7 +56,7 @@
         ./functionality/partitions.nix
         ./functionality/graphics.nix
 
-        ./desktop/general.nix
+        ./desktop/desktop.nix
 
         ./apps/gaming.nix
         ./apps/browser.nix
