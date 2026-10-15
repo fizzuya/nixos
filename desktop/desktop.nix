@@ -1,32 +1,15 @@
 { config, pkgs, lib, username, ... }:
 
 let
-    desktop-type = "kde"; # kde or hypr
+    desktop-type = "kde"; # kde or hypr # does nothing bc its defined with a mySystem variable in flake
 in
 {
-    options.mySystem.desktop-type = with lib; mkOption {
-        type = types.enum [ "kde" "hypr" ];
-        default = "kde";
-        description = "pick your poison (DE)";
-    };
-
-
     imports = [
          ./hypr.nix
          ./kde.nix
     ];
 
     config = {
-        mySystem.desktop-type = desktop-type;
-
-
-
-
-
-
-
-
-
 
 
 

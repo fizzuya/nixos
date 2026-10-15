@@ -19,5 +19,8 @@ linux_7_1_4 = pkgs.linuxPackagesFor (pkgs.linux_7_1.override {
         });
 in
 {
-    boot.kernelPackages = linuxlatest;
+    config = {
+        boot.kernelPackages = if (config.mySystem.kernel-type == "cachy") then cachykernel
+            else linuxlatest;
+    };
 }

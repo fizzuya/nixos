@@ -1,78 +1,130 @@
 {
-  description = "flake config";
+    description = "flake config";
 
-  inputs = {
-    # default NixOS unstable branch
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    inputs = {
+        # default NixOS unstable branch
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    systems.url = "github:nix-systems/default";
+        chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+        systems.url = "github:nix-systems/default";
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+        nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+        spicetify-nix = {
+        url = "github:Gerg-L/spicetify-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+        };
+
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+    outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, nix-cachyos-kernel, ... }@inputs:
+    let
+        username = "fizzu";
+        hostname = "nixos";
+
+            # Define your available matrix dimensions
+        kernels = [ "latest" "cachy" ];
+        desktop-types = [ "kde" "hypr" ];
+        nvidia-drivers = [ "kernel" "cachy" ];
+        nvidia-primes = [ "offload" "sync" "reverse-sync" ];
+
+        # function to generate a specific system combination
+        makeSystem = kernel: desktop: driver: prime: {
+            name = "${kernel}-${desktop}-${driver}-${prime}";
+            value = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = { inherit inputs; username = "${username}"; hostname = "${hostname}"; };
+                modules = [
+                    (
+                        { lib, ... }: {
+                            options.mySystem = {
+                                kernel-type = with lib; mkOption {
+                                    type = types.enum kernels;
+                                    default = "latest";
+                                    description = "kernel variant: ${kernels}";
+                                };
+
+                                desktop-type = with nixpkgs.lib; mkOption {
+                                    type = types.enum desktop-types;
+                                    default = "kde";
+                                    description = "pick your poison (DE): ${desktop-types}";
+                                };
+
+                                nvidia-driver-package = with nixpkgs.lib; mkOption {
+                                    type = types.enum nvidia-drivers;
+                                    default = "kernel";
+                                    description = "nvidia driver type: bundled with kernel, cachy, or whatever else i might add in the future thats not there yet";
+                                };
+
+                                nvidia-primeconfig = with nixpkgs.lib; mkOption {
+                                    type = types.enum nvidia-primes;
+                                    default = "offload";
+                                    description = "primeconfig for nvidia graphics card: ${nvidia-primes}";
+                                };
+                            };
+
+                            config.mySystem = {
+                                kernel-type = kernel;
+                                desktop-type = desktop;
+                                nvidia-driver-package = driver;
+                                nvidia-primeconfig = prime;
+                            };
+                        }
+                    )
+
+                    # for cachyos kernel;
+                    chaotic.nixosModules.nyx-cache
+                    chaotic.nixosModules.nyx-overlay
+                    chaotic.nixosModules.nyx-registry
+
+                    ./configuration.nix
+                    ./hardware-configuration.nix
+
+                    ./functionality/kernel.nix
+                    ./functionality/bluetooth.nix
+                    ./functionality/partitions.nix
+                    ./functionality/graphics.nix
+
+                    ./desktop/desktop.nix
+
+                    ./apps/gaming.nix
+                    ./apps/browser.nix
+                    ./apps/terminal.nix
+                    ./apps/utils.nix
+                    ./apps/media.nix
+                    ./apps/autostart.nix
+
+
+                    ./home.nix
+                    home-manager.nixosModules.home-manager
+                    {
+                        home-manager.extraSpecialArgs = { inherit inputs; };
+                    }
+
+                ];
+            };
+        };
+
+        # generate list of permutations
+        allPermutations = nixpkgs.lib.flatten (
+        map (kernel:
+            map (desktop:
+                map (driver:
+                    map (prime: makeSystem kernel desktop driver prime) nvidia-primes
+                    ) nvidia-drivers
+                ) desktop-types
+            ) kernels
+        );
+
+    in
+    {
+        nixosConfigurations = (builtins.listToAttrs allPermutations) // {
+            "${hostname}" = (builtins.listToAttrs allPermutations)."latest-kde-kernel-offload"; # default fallback if no specified
+        };
     };
-
-  };
-
-  outputs = { self, nixpkgs, systems, home-manager, spicetify-nix, chaotic, nix-cachyos-kernel, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; username = "fizzu";};
-      modules = [
-        (
-          { pkgs, ... }:
-          {
-            nixpkgs.overlays = [
-              # Use the exact nixpkgs revision as defined in this repo to ensure binary cache hits.
-              # to not compile kernel locally each time
-#               nix-cachyos-kernel.overlays.pinned
-
-              # Alternatively, use nixpkgs from your environment, nixpkgs.config will apply.
-              # Note: may not hit binary cache; kernel will need to be built locally.
-#               nix-cachyos-kernel.overlays.default
-
-              # Only use one of the two overlays!
-            ];
-          }
-        )
-        # for cachyos kernel;
-        chaotic.nixosModules.nyx-cache
-        chaotic.nixosModules.nyx-overlay
-        chaotic.nixosModules.nyx-registry
-
-        ./configuration.nix
-        ./hardware-configuration.nix
-
-        ./functionality/kernel.nix
-        ./functionality/bluetooth.nix
-        ./functionality/partitions.nix
-        ./functionality/graphics.nix
-
-        ./desktop/desktop.nix
-
-        ./apps/gaming.nix
-        ./apps/browser.nix
-        ./apps/terminal.nix
-        ./apps/utils.nix
-        ./apps/media.nix
-        ./apps/autostart.nix
-
-
-        ./home.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.extraSpecialArgs = { inherit inputs; };
-        }
-
-      ];
-    };
-  };
 }

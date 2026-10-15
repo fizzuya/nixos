@@ -61,21 +61,10 @@ let
     '';
 in
 {
-    options.mySystem.nvidia-primeconfig = with lib; mkOption {
-        type = types.enum [ "sync" "offload" "reverse-sync" ];
-        default = "offload";
-        description = "primeconfig for nvidia graphics card; sync, offload or reverse-sync";
-    };
-
-    options.mySystem.nvidia-driver-package = with lib; mkOption {
-        type = types.enum [ "kernel" "cachy" ];
-        default = "kernel";
-        description = "nvidia driver type: bundled with kernel, cachy, or whatever else i might add in the future thats not there yet";
-    };
 
     config = {
-        mySystem.nvidia-primeconfig = primeconfig;
-        mySystem.nvidia-driver-package = nvidia-driver-package;
+#         mySystem.nvidia-primeconfig = primeconfig;
+#         mySystem.nvidia-driver-package = nvidia-driver-package;
 
         nixpkgs.config.allowUnfree = true;
 
