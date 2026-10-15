@@ -36,7 +36,11 @@ in
             '';
 
             shellAliases = {
-                rebuild = "sudo nixos-rebuild switch --flake /etc/nixos";
+                reswitch = "sudo nixos-rebuild switch --flake /etc/nixos";
+                dry-run = "sudo nixos-rebuild dry-run --flake /etc/nixos";
+                rebuild-test = "sudo nixos-rebuild test --flake /etc/nixos";
+                next-boot = "sudo nixos-rebuild boot --flake /etc/nixos";
+
                 update = "gitgo && sudo nix flake update && rebuild";
 
 #                 fladd = "gitgo && gitadd flake.lock";
