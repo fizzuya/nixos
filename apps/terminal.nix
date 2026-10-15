@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 
 let
@@ -12,6 +12,29 @@ let
             --prefix LD_LIBRARY_PATH : "/run/opengl-driver/lib:/run/opengl-driver-32/lib"
         '';
     };
+
+    nix-config-location = "/home/${username}/nixos/";
+    aliases = {
+        reswitch = "sudo nixos-rebuild switch --flake ${nix-config-location}";
+        dry-run = "sudo nixos-rebuild dry-run --flake ${nix-config-location}";
+        rebuild-test = "sudo nixos-rebuild test --flake ${nix-config-location}";
+        next-boot = "sudo nixos-rebuild boot --flake ${nix-config-location}";
+
+        update = "gitgo && nix flake update && sudo nixos-rebuild switch --flake ${nix-config-location}";
+
+#         fladd = "gitgo && gitadd flake.lock";
+        flcommit = "gitadd flake.lock && gitcommit -m 'updated flake'";
+        gitgo   = "cd ${nix-config-location}";
+        gitstatus  = "git status";
+        gitadd     = "git add";
+        gitcommit  = "git commit";
+        doall = "gitadd -A && rebuild";
+        gitdiff = "git diff";
+        gitcheckout = "git checkout";
+        gitpush = "git push";
+        githist    = "git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
+        archive = "7z a /home/${username}/storage/backups/nix/\"nixos - $(date +%Y-%m-%d).7z\" ${nix-config-location}";
+    };
 in
 {
     environment.systemPackages = with pkgs;[
@@ -19,7 +42,9 @@ in
         wrapped-btop
     ];
 
-    home-manager.users.fizzu = { pkgs, ... }: {
+    environment.shellAliases = aliases;
+
+    home-manager.users.${username} = { pkgs, ... }: {
         programs.kitty = {
             enable = true;
             shellIntegration.enableFishIntegration = true;
@@ -35,27 +60,7 @@ in
                 fastfetch
             '';
 
-            shellAliases = {
-                reswitch = "sudo nixos-rebuild switch --flake /etc/nixos";
-                dry-run = "sudo nixos-rebuild dry-run --flake /etc/nixos";
-                rebuild-test = "sudo nixos-rebuild test --flake /etc/nixos";
-                next-boot = "sudo nixos-rebuild boot --flake /etc/nixos";
-
-                update = "gitgo && sudo nix flake update && rebuild";
-
-#                 fladd = "gitgo && gitadd flake.lock";
-                flcommit = "gitadd flake.lock && gitcommit -m 'updated flake'";
-                gitgo   = "cd /etc/nixos";
-                gitstatus  = "sudo git status";
-                gitadd     = "sudo git add";
-                gitcommit  = "sudo git commit";
-                doall = "gitadd -A && rebuild";
-                gitdiff = "sudo git diff";
-                gitcheckout = "sudo git checkout";
-                gitpush = "sudo git push";
-                githist    = "sudo git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
-                archive = "sudo 7z a /home/fizzu/storage/backups/nix/\"nixos - $(date +%Y-%m-%d).7z\" /etc/nixos";
-            };
+            shellAliases = aliases;
         };
     };
 }
