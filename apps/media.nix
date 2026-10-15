@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, username, ... }:
 
 let
     antra = import ./appimages/antra.nix {inherit pkgs;};
@@ -29,7 +29,7 @@ in
         discord
     ];
 
-    home-manager.users.fizzu = {inputs, ...}:{
+    home-manager.users.${username} = {inputs, ...}:{
         imports = [inputs.spicetify-nix.homeManagerModules.default];
 
         programs.spicetify =
