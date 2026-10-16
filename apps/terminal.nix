@@ -15,10 +15,10 @@ let
 
     nix-config-location = "/home/${username}/nixos/";
     aliases = {
-        reswitch = "sudo nixos-rebuild switch --flake ${nix-config-location}";
-        dry-run = "sudo nixos-rebuild dry-run --flake ${nix-config-location}";
-        rebuild-test = "sudo nixos-rebuild test --flake ${nix-config-location}";
-        next-boot = "sudo nixos-rebuild boot --flake ${nix-config-location}";
+        reswitch = "sudo nixos-rebuild switch --flake ${nix-config-location}"; # switches instantly
+        re-dry-run = "sudo nixos-rebuild dry-run --flake ${nix-config-location}"; # doesnt apply, just builds to test it out
+        re-test = "sudo nixos-rebuild test --flake ${nix-config-location}"; # deriv will apply until a reboot
+        re-next-boot = "sudo nixos-rebuild boot --flake ${nix-config-location}"; # deriv will apply on reboot
 
         update = "gitgo && nix flake update && sudo nixos-rebuild switch --flake ${nix-config-location}";
 
