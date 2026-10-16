@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
   # don't forget to fix IDs in hardware-configuration.nix after reinstall. or could run nixos-generate-config but i dont like that tbh id rather do it manually
 
 {
-  fileSystems."/home/fizzu/storage" = {
+  fileSystems."/home/${username}/storage" = {
     device = "/dev/disk/by-uuid/63108475-f3e5-4e0f-bd85-19a546b82166";
     fsType = "btrfs";
     options = [
@@ -14,7 +14,7 @@
     ];
   };
 
-  fileSystems."/home/fizzu/extra" = {
+  fileSystems."/home/${username}/extra" = {
     device = "/dev/disk/by-uuid/fac02089-a912-4bfa-8671-28ba3ac4a28d";
     fsType = "btrfs";
     options = [
@@ -26,15 +26,15 @@
   };
   swapDevices = [
       {device = "/swapfile" ; size = 1024 * 1; } # just do a minimum of 1 gb or it kinda shits itself bleegh
-      {device = "/home/fizzu/extra/swapfile" ; # the "extra" partition
+      {device = "/home/${username}/extra/swapfile" ; # the "extra" partition
           size = 1024 * 16;}
   ];
 
 
   # ensures the target directory exists
   systemd.tmpfiles.rules = [
-    "d /home/fizzu/storage 0755 fizzu users -"
-    "d /home/fizzu/extra 0755 fizzu users -"
+    "d /home/${username}/storage 0755 ${username} users -"
+    "d /home/${username}/extra 0755 ${username} users -"
   ];
 
 #   how to get uuids example:
