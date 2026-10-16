@@ -11,14 +11,20 @@
         nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
         spicetify-nix = {
-        url = "github:Gerg-L/spicetify-nix";
-        inputs.nixpkgs.follows = "nixpkgs";
+            url = "github:Gerg-L/spicetify-nix";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
 
         home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
+        noctalia = {
+            url = "github:noctalia-dev/noctalia/cachix"; # cached one
+#             url = "github:noctalia-dev/noctalia";
+#             inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
+        };
+
 
     };
 
@@ -66,6 +72,12 @@
                                     default = "offload";
                                     description = "primeconfig for nvidia graphics card: ${nvidia-primes}";
                                 };
+
+                                noctalia-enable = with nixpkgs.lib; mkOption {
+                                    type = bool;
+                                    default = true;
+                                    description = "if noctalia should be enabled";
+                                };
                             };
 
                             config.mySystem = {
@@ -73,6 +85,7 @@
                                 desktop-type = desktop;
                                 nvidia-driver-package = driver;
                                 nvidia-primeconfig = prime;
+                                noctalia-enable = true;
                             };
                         }
                     )

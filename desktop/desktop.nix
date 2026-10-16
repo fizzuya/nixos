@@ -10,7 +10,7 @@ in
     ];
 
     config = {
-
+        # noctalia variable config.mySystem.noctalia-enable in flake
 
 
 
