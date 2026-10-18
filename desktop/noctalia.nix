@@ -6,12 +6,12 @@
     ];
 
     config = lib.mkIf ((config.mySystem.desktop-type == "hypr") && (config.mySystem.noctalia-enable == true)) {
-        programs.noctalia = {
-            enable = true;
-
-            # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
-            recommendedServices.enable = true;
-        };
+#         programs.noctalia = {
+#             enable = true;
+#
+#             # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
+#             recommendedServices.enable = true;
+#         };
         programs.noctalia.systemd.enable = true;
 
 
@@ -32,7 +32,7 @@
 
                     wallpaper = {
                     enabled = true;
-                    default.path = "/home/fizzu/storage/Slop/Important_stuff/chaos\ invoked\ -\ ismail\ inceoglu.jpg";
+#                     default.path = "/home/fizzu/storage/Slop/Important_stuff/chaos\ invoked\ -\ ismail\ inceoglu.jpg";
                     };
                 };
             };

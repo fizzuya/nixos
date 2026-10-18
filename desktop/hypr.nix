@@ -6,7 +6,7 @@
     ];
 
     config = lib.mkIf (config.mySystem.desktop-type == "hypr") {
-        programs.hyprland.enable = true; # enable Hyprland
+        programs.hyprland.enable = true; # enable Hyprland system wide
 
         environment.systemPackages = [
             # ... other packages
@@ -18,8 +18,18 @@
             programs.kitty.enable = true; # required for the default Hyprland config
             wayland.windowManager.hyprland.enable = true; # enable Hyprland
 
+            package = null; # https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/
+            portalPackage = null;
+
+
             # Optional, hint Electron apps to use Wayland:
             home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+            xdg.configFile."hypr" = {
+                source = ./hypr-bunny;
+                recursive = true;
+            };
+
         };
     };
 }

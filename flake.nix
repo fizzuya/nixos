@@ -33,7 +33,8 @@
         username = "fizzu";
         hostname = "nixos";
 
-            # Define your available matrix dimensions
+            # params which have different variants.
+            # need to manually plug them in inside other files accordingly to what u want but it's easier to manage everything from here
         kernels = [ "latest" "cachy" ];
         desktop-types = [ "kde" "hypr" ];
         nvidia-drivers = [ "kernel" "cachy" ];
@@ -48,6 +49,14 @@
                 modules = [
                     (
                         { lib, ... }: {
+                            config.mySystem = {
+                                kernel-type = kernel;
+                                desktop-type = desktop;
+                                nvidia-driver-package = driver;
+                                nvidia-primeconfig = prime;
+#                                 noctalia-enable = true;
+                            };
+
                             options.mySystem = {
                                 kernel-type = with lib; mkOption {
                                     type = types.enum kernels;
@@ -74,18 +83,10 @@
                                 };
 
                                 noctalia-enable = with nixpkgs.lib; mkOption {
-                                    type = bool;
+                                    type = types.bool;
                                     default = true;
-                                    description = "if noctalia should be enabled";
+                                    description = "if noctalia should be enabled /// not used in system making action";
                                 };
-                            };
-
-                            config.mySystem = {
-                                kernel-type = kernel;
-                                desktop-type = desktop;
-                                nvidia-driver-package = driver;
-                                nvidia-primeconfig = prime;
-                                noctalia-enable = true;
                             };
                         }
                     )
