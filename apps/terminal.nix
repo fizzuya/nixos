@@ -20,7 +20,7 @@ let
         re-test = "sudo nixos-rebuild test --flake ${nix-config-location}"; # deriv will apply until a reboot
         re-next-boot = "sudo nixos-rebuild boot --flake ${nix-config-location}"; # deriv will apply on reboot
 
-        update = "gitgo && nix flake update && sudo nixos-rebuild switch --flake ${nix-config-location}";
+        update = "gitgo && sudo nix flake update && sudo nixos-rebuild switch --flake ${nix-config-location}";
 
 #         fladd = "gitgo && gitadd flake.lock";
         flcommit = "gitadd flake.lock && gitcommit -m 'updated flake'";
