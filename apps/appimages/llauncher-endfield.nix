@@ -4,12 +4,12 @@ let
   fetchurl = pkgs.fetchurl;
   appimageTools = pkgs.appimageTools;
 
-  version = "1.3.4";
+  version = "1.3.5";
   pname = "llauncher-endfield";
 
   src = fetchurl {
     url = "https://github.com/AugustLigh/LLauncher/releases/download/${version}/LLauncher_${version}_amd64.AppImage";
-    hash = "sha256-sSeWmncHf+nYOtAgk2HjsfM8dwlrHo6QxHT9ttArve4=";
+    hash = "sha256-54mFB/2lhU5bcEpsWMNUawh88s9xYRn4ZXMGL1x96KQ=";
   };
 
   appimageContents = appimageTools.extract { inherit pname version src; };
