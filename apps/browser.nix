@@ -18,7 +18,9 @@
     enable = true; # plasma does it anyway. false would throw a conflict error
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config = {
-      common.default = "gtk";
+      common = {
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
     };
   };
 
