@@ -50,43 +50,45 @@
         /* ---- EXTENSIONS ---- */
         # Check about:support for extension/add-on ID strings.
         # "force_installed" and "normal_installed".
-        ExtensionSettings = {
+        ExtensionSettings = let moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi"; in
+            {
             # Valid strings for installation_mode are "allowed", "blocked", "force_installed" and "normal_installed".
             "*".installation_mode = "allowed";
 
             # uBlock Origin:
             "uBlock0@raymondhill.net" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-                installation_mode = "force_installed";
-            };
-            # ytRowFixer:
-            "{b6b8a44a-b6d7-42e2-ba01-636632196d01}" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-row-fixer-extension/latest.xpi";
-                installation_mode = "force_installed";
-            };
-            # Ctrl+Number to switch tabs:
-            "{84601290-bec9-494a-b11c-1baa897a9683}" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ctrl-number-to-switch-tabs/latest.xpi";
-                installation_mode = "force_installed";
-            };
-            # Sponsorblock
-            "sponsorBlocker@ajay.app" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-                installation_mode = "force_installed";
-            };
-            # Stylebot
-            "{52bda3fd-dc48-4b3d-a7b9-58af57879f1e}" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/stylebot-web/latest.xpi";
-                installation_mode = "force_installed";
+                install_url = moz "ublock-origin";
+                installation_mode = "allowed"; # allowed for normal behavior or force_installed to well do that
             };
             # Adnauseam
+            # disable ublock if u use this bc it has ublock inside
             "adnauseam@rednoise.org" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/adnauseam/latest.xpi";
+                install_url = moz "adnauseam";
                 installation_mode = "force_installed";
             };
             # Ghostery
             "firefox@ghostery.com" = {
-                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ghostery/latest.xpi";
+                install_url = moz "ghostery";
+                installation_mode = "force_installed";
+            };
+            # ytRowFixer:
+            "{b6b8a44a-b6d7-42e2-ba01-636632196d01}" = {
+                install_url = moz "youtube-row-fixer-extension";
+                installation_mode = "force_installed";
+            };
+            # Ctrl+Number to switch tabs:
+            "{84601290-bec9-494a-b11c-1baa897a9683}" = {
+                install_url = moz "ctrl-number-to-switch-tabs";
+                installation_mode = "force_installed";
+            };
+            # Sponsorblock
+            "sponsorBlocker@ajay.app" = {
+                install_url = moz "sponsorblock";
+                installation_mode = "force_installed";
+            };
+            # Stylebot
+            "{52bda3fd-dc48-4b3d-a7b9-58af57879f1e}" = {
+                install_url = moz "stylebot-web";
                 installation_mode = "force_installed";
             };
 
