@@ -79,6 +79,16 @@
                 install_url = "https://addons.mozilla.org/firefox/downloads/latest/stylebot-web/latest.xpi";
                 installation_mode = "force_installed";
             };
+            # Adnauseam
+            "adnauseam@rednoise.org" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/adnauseam/latest.xpi";
+                installation_mode = "force_installed";
+            };
+            # Ghostery
+            "firefox@ghostery.com" = {
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ghostery/latest.xpi";
+                installation_mode = "force_installed";
+            };
 
         };
         /* ---- PREFERENCES ---- */
