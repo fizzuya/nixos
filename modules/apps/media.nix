@@ -1,7 +1,7 @@
 { config, pkgs, inputs, username, ... }:
 
 let
-    antra = import ./appimages/antra.nix {inherit pkgs;};
+    antra = import ./antra {inherit pkgs;};
 in
 {
     environment.systemPackages = with pkgs; [

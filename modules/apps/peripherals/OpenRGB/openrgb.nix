@@ -2,7 +2,7 @@
 { config, pkgs, username, ... }:
 
 let
-    source = "/etc/nixos/apps/utils/OpenRGB/";
+    source = "./configs";
 #     profile-name = "cyan";
     profile-file = "${profile-name}.orp";
     config-path = "${config.users.users.${username}.home}/.config/OpenRGB/";

@@ -1,18 +1,6 @@
 { config, pkgs, username, ... }:
 
-
 let
-    # gives btop a pointer to the gpu
-    wrapped-btop = pkgs.symlinkJoin {
-        name = "btop";
-        paths = [ pkgs.btop ];
-        buildInputs = [ pkgs.makeWrapper ];
-        postBuild = ''
-        wrapProgram $out/bin/btop \
-            --prefix LD_LIBRARY_PATH : "/run/opengl-driver/lib:/run/opengl-driver-32/lib"
-        '';
-    };
-
     nix-config-location = "/home/${username}/nixos/";
     aliases = {
         reswitch = "sudo nixos-rebuild switch --flake ${nix-config-location}"; # switches instantly
@@ -37,30 +25,15 @@ let
     };
 in
 {
-    environment.systemPackages = with pkgs;[
-        fastfetch
-        wrapped-btop
+    imports = [
+        (import ./kitty { inherit aliases; })
+        ./btop
     ];
 
-    environment.shellAliases = aliases;
-
-    home-manager.users.${username} = { pkgs, ... }: {
-        programs.kitty = {
-            enable = true;
-            shellIntegration.enableFishIntegration = true;
-            settings = {
-                shell = "fish";
-            };
-        };
-
-        programs.fish = {
-            enable = true;
-            # autorun fastfetch
-            shellInit = ''
-                fastfetch
-            '';
-
-            shellAliases = aliases;
-        };
+    config = {
+        environment.systemPackages = with pkgs;[
+            fastfetch
+        ];
+        environment.shellAliases = aliases;
     };
 }

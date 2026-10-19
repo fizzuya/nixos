@@ -2,7 +2,9 @@
 
 {
     imports = [
-        ./utils/peripherals.nix
+        ./peripherals
+        ./vpns
+        ./browser
     ];
 
     environment.systemPackages = with pkgs; [
@@ -58,19 +60,9 @@
         onlyoffice-desktopeditors
 
         nethogs # network usage by processes
-        wireguard-tools
-        proton-vpn
-        mullvad-vpn # "application" part of mullvad, needed so kde sees it as an app for example.
-                    # vpn would work without it with gui but it'd need to be run with a terminal
     ];
 
     environment.sessionVariables = {
         DOTNET_ROOT = "${pkgs.dotnetCorePackages.runtime_10_0-bin}/share/dotnet"; # for vintagestory, dont forget to set custom in lutris game conf if running via wine
-    };
-
-    #enabling mullvad via service bc just adding package doesnt work, also making it have a gui
-    services.mullvad-vpn = {
-        enable = true;
-        gui.enable = true;
     };
 }

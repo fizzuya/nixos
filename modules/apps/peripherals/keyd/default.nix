@@ -1,20 +1,8 @@
-{ config, pkgs, username, ... }:
+{ config, pkgs, ... }:
 
-let
-    openrgb-profile = "pink-cyan";
-in
 {
     environment.systemPackages = with pkgs; [
-#         openrgb # already in imported openrgb.nix conf
-        logiops
         keyd
-        logitech-udev-rules
-    ];
-
-    # importing all the openrgb handling in the world in its own file in its own folder bc openrgb is a bitch and wants a whole ass script after the evil update
-    imports =
-    [
-        (import ./OpenRGB/openrgb.nix { profile-name = "${openrgb-profile}"; })
     ];
 
     services.keyd = {
@@ -41,23 +29,6 @@ in
                 in pkgs.lib.recursiveUpdate copilot dead_row_bandaid; # merges the 2 into one file
 
             };
-        };
-    };
-
-    # adds logitech stuff stuff so mouse can be controlled
-    # like pkgs.logitech-udev-rules
-    hardware.logitech.wireless.enable = true; # idk if necessary or if does anything
-
-    # configure existing logiops service to use wanted dpi
-    services.logiops = {
-        enable = true;
-        config = {
-            devices = [
-                {
-                name = "G203 LIGHTSYNC Gaming Mouse";
-                dpi = 1100;
-                }
-            ];
         };
     };
 }

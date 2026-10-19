@@ -96,25 +96,24 @@
                     chaotic.nixosModules.nyx-overlay
                     chaotic.nixosModules.nyx-registry
 
+                    # might eventually get redistributed to other places bit by bit, here for now
                     ./configuration.nix
                     ./hardware-configuration.nix
 
-                    ./functionality/kernel.nix
-                    ./functionality/bluetooth.nix
-                    ./functionality/partitions.nix
-                    ./functionality/graphics.nix
+                    # system things
+                    ./modules/system
+                    ./modules/desktop
 
-                    ./desktop/desktop.nix
+                    # "root" nix files that call other packages inside the "apps" folder
+                    ./modules/apps/gaming.nix
+                    ./modules/apps/utils.nix
+                    ./modules/apps/media.nix
 
-                    ./apps/gaming.nix
-                    ./apps/browser.nix
-                    ./apps/terminal.nix
-                    ./apps/utils.nix
-                    ./apps/media.nix
-                    ./apps/autostart.nix
+                    # is called from here bc of how important it is
+                    ./modules/apps/terminal
 
-
-                    ./home.nix
+                    # home manager in its own corner # tho theres really nothing going on in there tbh
+                    ./modules/home
                     home-manager.nixosModules.home-manager
                     {
                         home-manager.extraSpecialArgs = { inherit inputs; };

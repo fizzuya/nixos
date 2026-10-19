@@ -5,8 +5,9 @@ let
 in
 {
     imports = [
-         ./hypr.nix
-         ./kde.nix
+         ./hypr/hypr.nix
+         ./kde/kde.nix
+         ./portals/xdg-portals.nix
     ];
 
     config = {
