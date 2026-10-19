@@ -59,37 +59,44 @@
             "uBlock0@raymondhill.net" = {
                 install_url = moz "ublock-origin";
                 installation_mode = "allowed"; # allowed for normal behavior or force_installed to well do that
+                private_browsing = true;
             };
             # Adnauseam
             # disable ublock if u use this bc it has ublock inside
             "adnauseam@rednoise.org" = {
                 install_url = moz "adnauseam";
                 installation_mode = "force_installed";
+                private_browsing = true;
             };
             # Ghostery
             "firefox@ghostery.com" = {
                 install_url = moz "ghostery";
                 installation_mode = "force_installed";
+                private_browsing = true;
             };
             # ytRowFixer:
             "{b6b8a44a-b6d7-42e2-ba01-636632196d01}" = {
                 install_url = moz "youtube-row-fixer-extension";
                 installation_mode = "force_installed";
+                private_browsing = true;
             };
             # Ctrl+Number to switch tabs:
             "{84601290-bec9-494a-b11c-1baa897a9683}" = {
                 install_url = moz "ctrl-number-to-switch-tabs";
                 installation_mode = "force_installed";
+                private_browsing = true;
             };
             # Sponsorblock
             "sponsorBlocker@ajay.app" = {
                 install_url = moz "sponsorblock";
                 installation_mode = "force_installed";
+                private_browsing = true;
             };
             # Stylebot
             "{52bda3fd-dc48-4b3d-a7b9-58af57879f1e}" = {
                 install_url = moz "stylebot-web";
                 installation_mode = "force_installed";
+                private_browsing = true;
             };
 
         };
