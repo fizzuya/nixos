@@ -1,13 +1,6 @@
 { config, pkgs, ... }:
 
 {
-    xdg.mime.defaultApplications = {
-        "text/html" = "firefox.desktop";
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
-        "default-web-browser" = "firefox.desktop";
-    };
-
     # configuring xdg to use gtk as default portal
     # thunar is gtk so it should be synced with firefox
     # dolphin is a BITCH so eeah gotta do gtk portal+thunar sadly
