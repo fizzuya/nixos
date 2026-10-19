@@ -26,6 +26,7 @@ in
         min-ed-launcher
         deadlock-mod-manager
         llauncher-endfield
+        gale
 
         protonplus
         protontricks
