@@ -36,7 +36,7 @@
             # params which have different variants.
             # need to manually plug them in inside other files accordingly to what u want but it's easier to manage everything from here
         kernels = [ "latest" "cachy" ];
-        desktop-types = [ "kde" "hypr" ];
+        desktop-types = [ "kde" "hypr" "gnome" ];
         nvidia-drivers = [ "kernel" "cachy" ];
         nvidia-primes = [ "offload" "sync" "reverse-sync" ];
 

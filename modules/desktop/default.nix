@@ -8,6 +8,7 @@ in
          ./hypr/hypr.nix
          ./kde/kde.nix
          ./portals/xdg-portals.nix
+         ./gnome/gnome.nix
     ];
 
     config = {
