@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    environment.systemPackages = [
-#         pkgs.chromium
+    environment.systemPackages = with pkgs; [
+        chromium
     ];
 }
