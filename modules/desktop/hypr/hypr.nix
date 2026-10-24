@@ -14,20 +14,30 @@
         ];
 
 
-        home-manager.users.${username} = {inputs, ...}:{
-            programs.kitty.enable = true; # required for the default Hyprland config
-            wayland.windowManager.hyprland.enable = true; # enable Hyprland
 
-            package = null; # https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/
-            portalPackage = null;
+        home-manager.users.${username} = {inputs, ...}:{
+#             programs.kitty.enable = true; # required for the default Hyprland config
+#             wayland.windowManager.hyprland.enable = true; # enable Hyprland
+#
+#             package = null; # https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/
+#             portalPackage = null;
+
+            wayland.windowManager.hyprland = {
+                enable = true;
+                package = null;
+                portalPackage = null;
+            };
 
 
             # Optional, hint Electron apps to use Wayland:
             home.sessionVariables.NIXOS_OZONE_WL = "1";
 
-            xdg.configFile."hypr" = {
-                source = ./hypr-bunny;
-                recursive = true;
+            xdg.configFile ={
+                "hypr" = {
+                    source = ./hypr-bunny;
+                    recursive = true;
+                };
+                "xdph/xdph.conf".source = ./hypr-bunny/xdph.conf;
             };
 
         };
