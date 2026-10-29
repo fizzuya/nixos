@@ -4,6 +4,7 @@
     imports = [
         ./firefox
         ./chromium
+        ./librewolf
     ];
     config = {
         xdg.mime.defaultApplications = {
