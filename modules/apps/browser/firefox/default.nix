@@ -24,7 +24,7 @@
             DisableTelemetry = true;
             DisableFirefoxStudies = true;
             EnableTrackingProtection = {
-                Value= true;
+                Value = true;
                 Locked = true;
                 Cryptomining = true;
                 Fingerprinting = true;
@@ -50,14 +50,15 @@
                 # uBlock Origin:
                 "uBlock0@raymondhill.net" = {
                     install_url = moz "ublock-origin";
-                    installation_mode = "allowed"; # allowed for normal behavior or force_installed to well do that
+                    installation_mode = "force_installed"; # allowed for normal behavior or force_installed to well do that
                     private_browsing = true;
                 };
                 # Adnauseam
                 # disable ublock if u use this bc it has ublock inside
+                # tbh its kinda buns idk
                 "adnauseam@rednoise.org" = {
                     install_url = moz "adnauseam";
-                    installation_mode = "force_installed";
+                    installation_mode = "allowed"; #
                     private_browsing = true;
                 };
                 # Ghostery
