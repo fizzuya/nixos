@@ -25,6 +25,10 @@
 #             inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
         };
 
+        grimoire = { # another deadlock mod manager
+            url = "github:Slush97/grimoire";
+        };
+
 
     };
 

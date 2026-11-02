@@ -8,6 +8,7 @@ in
     imports = [
         ./mangohud
         ./steam
+        ./grimoire-deadlock
     ];
 
     environment.systemPackages = with pkgs; [
