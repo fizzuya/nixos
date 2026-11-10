@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
     config = {
-        environment.systemPackages = [ pkgs.grimoire ];
+        environment.systemPackages = [ inputs.grimoire.packages.${pkgs.stdenv.hostPlatform.system}.default ];
     };
 }
