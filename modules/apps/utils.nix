@@ -7,10 +7,7 @@
         ./browser
     ];
 
-    security.pki.caCertificateBlacklist = [ # important bs from delulu due to some certeficate leakage
-        "Comodo AAA Services root"
-        "emSign ECC Root CA - G3"
-        ];
+
 
     environment.systemPackages = with pkgs; [
         git
