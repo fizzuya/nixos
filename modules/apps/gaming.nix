@@ -18,9 +18,9 @@ in
             jdks = [openjdk25 temurin-bin-21 temurin-bin-17 temurin-bin-8];
         })
         min-ed-launcher
-        deadlock-mod-manager
         llauncher-endfield
-        gale
+#         deadlock-mod-manager # these 2 break things bc no certain updates after upstream changes. dont use them anyway so whatever for now
+#         gale #
 
         protonplus
         protontricks
