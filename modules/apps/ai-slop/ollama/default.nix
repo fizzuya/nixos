@@ -13,5 +13,4 @@
         # Optional: preload models, see https://ollama.com/library
 #         loadModels = [ "qwen3.5:4b"];
     };
-
 }

@@ -4,5 +4,7 @@
     imports = [
         ./ollama
         ./claude
+        ./opencode
+        ./lmstudio
     ];
 }
