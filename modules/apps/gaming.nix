@@ -9,10 +9,10 @@ in
         ./mangohud
         ./steam
         ./grimoire-deadlock
+        ./lutris
     ];
 
     environment.systemPackages = with pkgs; [
-        lutris
         xivlauncher
         (pkgs.prismlauncher.override {
             jdks = [openjdk25 temurin-bin-21 temurin-bin-17 temurin-bin-8];
