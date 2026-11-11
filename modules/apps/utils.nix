@@ -5,6 +5,7 @@
         ./peripherals
         ./vpns
         ./browser
+        ./ai-slop
     ];
 
 
