@@ -11,6 +11,6 @@
         enable = true;
         package = pkgs.ollama-cuda;
         # Optional: preload models, see https://ollama.com/library
-#         loadModels = [ "qwen3.5:4b"];
+#         loadModels = ["qwen3.5:4b"];
     };
 }
