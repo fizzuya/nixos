@@ -14,8 +14,8 @@
         git
         home-manager
 
-#         vscode-fhs # idk what fhs is tbh but vscode ig
-        vscodium
+#         vscode-fhs # wrapped version of vscode that doesnt explode bc its running in nix
+        vscodium-fhs # wrapped version of vscodium that doesnt explode bc its running in nix
         (python314.withPackages (ps: with ps; # Python Set to ensure all is from one package
             [
                 tkinter
