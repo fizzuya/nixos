@@ -30,6 +30,7 @@
         gnumake
         dotnetCorePackages.sdk_10_0-bin # to run vintagestory natively in lutris
         coreutils
+        nodejs
 
         gnugrep
         pciutils # pci devices database type shit idk sth along the lines
